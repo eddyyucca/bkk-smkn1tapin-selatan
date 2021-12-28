@@ -12,9 +12,9 @@
                     <div class="col-4">
                         <img class="shadow" <?php
                                             if ($data->foto == false) { ?> src="<?= base_url('assets/images/default.png') ?>" <?php
-                                                                                                                        } else {
-                                                                                                                            ?> src="<?= base_url('assets/foto_profil/' . $data->foto) ?>" <?php
-                                                                                                                                                                                        } ?> "
+                                                                                                                            } else {
+                                                                                                                                ?> src="<?= base_url('assets/foto_profil/' . $data->foto) ?>" <?php
+                                                                                                                                                                                            } ?> "
                               alt=" Sarana" class="card-img-top" data-holder-rendered="true" style="height: 275px; width: 225px; display: block;">
 
 
@@ -36,24 +36,8 @@
                         ?>
                         <table class="mt-2 ml-3">
                             <tr>
-                                <td> NIP</td>
-                                <td>: <?= $data->nip ?> </td>
-                            </tr>
-                            <tr>
                                 <td> Nama</td>
                                 <td>: <?= $data->nama_lengkap ?> </td>
-                            </tr>
-                            <tr>
-                                <td> Lama Bekerja</td>
-                                <td>: <?= hitung_umur($data->mulai_bekerja) ?> Tahun </td>
-                            </tr>
-                            <tr>
-                                <td> Bidang</td>
-                                <td>: <?= $data->nama_bidang ?> </td>
-                            </tr>
-                            <tr>
-                                <td> Jabatan </td>
-                                <td>: <?= $data->nama_jab ?> </td>
                             </tr>
                             <tr>
                                 <td> TTL </td>
@@ -71,9 +55,17 @@
                                 <td> No Telpon </td>
                                 <td>: <?= $data->no_telp ?> </td>
                             </tr>
-
+                            <tr>
+                                <td> Lulusan</td>
+                                <td>: Teknik Komputer & Jaringan (TKJ)</td>
+                            </tr>
                         </table>
-
+                        <hr>
+                        <a class="btn btn-primary mb-1" href="">Tentang Saya</a>
+                        <a class="btn btn-primary mb-1" href="">Curriculum Vitae</a>
+                        <a class="btn btn-primary mb-1" href="">Ijazah Terakhir & Lainnya</a>
+                        <a class="btn btn-primary mb-1" href="">SKCK</a>
+                        <a class="btn btn-primary mb-1" href="">Sertifikat Keahlian</a>
                     </div>
                 </div>
             </div>

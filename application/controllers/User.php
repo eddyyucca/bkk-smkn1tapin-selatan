@@ -13,11 +13,11 @@ class User extends CI_Controller
         $this->load->model('pengajuan_m');
         $this->load->library('pagination');
         $this->load->library('cart');
-        $level_akun = $this->session->userdata('level');
-        if ($level_akun != "user") {
+        // $level_akun = $this->session->userdata('level');
+        // if ($level_akun != "user") {
 
-            return redirect('auth');
-        }
+        //     return redirect('auth');
+        // }
     }
     public function index()
     {

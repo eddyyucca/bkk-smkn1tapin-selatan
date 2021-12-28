@@ -34,13 +34,13 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
       <!-- Sidebar -->
-      <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
+      <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('user') ?>">
           <div class="sidebar-brand-icon">
-            <img src="<?= base_url('assets/pemda-tapin.png'); ?>" width="50" height="60" alt="Logo pemda-tapin">
+            <img src="<?= base_url('assets/logo.png'); ?>" width="50" height="60" alt="Logo pemda-tapin">
           </div>
-          <div class="sidebar-brand-text mx-3">Pemda Tapin</div>
+          <div class="sidebar-brand-text mx-3">BKK SMK</div>
         </a>
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
@@ -68,40 +68,14 @@
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Pengajuan" aria-expanded="true" aria-controls="Pengajuan">
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#loker" aria-expanded="true" aria-controls="loker">
             <i class="fas fa-database"></i>
-            <span>Pengajuan Gaji Berkala</span>
+            <span>Lowongan Kerja</span>
           </a>
-          <div id="Pengajuan" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <div id="loker" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="<?= base_url('user/pengajuan') ?>">Pengajuan</a>
-              <a class="collapse-item" href="<?= base_url('user/history_pengajuan') ?>">History</a>
-            </div>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Absensi" aria-expanded="true" aria-controls="Absensi">
-            <i class="fas fa-database"></i>
-            <span>Absensi</span>
-          </a>
-          <div id="Absensi" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="<?= base_url('user/absensi') ?>">Absensi</a>
-              <a class="collapse-item" href="<?= base_url('user/absen') ?>">Riwayat Absensi</a>
-            </div>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#ATK" aria-expanded="true" aria-controls="ATK">
-            <i class="fas fa-database"></i>
-            <span>ATK</span>
-          </a>
-          <div id="ATK" class="collapse show" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="<?= base_url('user/atk') ?>">Pengajuan ATK</a>
-              <a class="collapse-item" href="<?= base_url('user/keranjang') ?>">Keranjangn (<?php echo count($keranjang); ?>)</a>
-              <!-- <a class="collapse-item" href="<?= base_url('user/history_pengajuan') ?>">Riwayat Pengajuan</a> -->
-              <a class="collapse-item" href="<?= base_url('user/status'); ?>">Status</a>
+              <a class="collapse-item" href="<?= base_url('user/loker') ?>">Cari Loker</a>
+              <a class="collapse-item" href="<?= base_url('user/loker') ?>">Pengajuan Loker</a>
             </div>
           </div>
         </li>

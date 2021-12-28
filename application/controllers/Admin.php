@@ -13,10 +13,10 @@ class Admin extends CI_Controller
         $this->load->model('bidang_m');
         $this->load->model('pengajuan_m');
 
-        $level_akun = $this->session->userdata('level');
-        if ($level_akun != "admin") {
-            return redirect('auth');
-        }
+        // $level_akun = $this->session->userdata('level');
+        // if ($level_akun != "admin") {
+        //     return redirect('auth');
+        // }
     }
 
     public function index()

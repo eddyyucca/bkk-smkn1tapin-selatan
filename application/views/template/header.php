@@ -34,13 +34,13 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
       <!-- Sidebar -->
-      <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
+      <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('admin') ?>">
           <div class="sidebar-brand-icon">
-            <img src="<?= base_url('assets/pemda-tapin.png'); ?>" width="50" height="60" alt="Logo Pemda-Tapin">
+            <img src="<?= base_url('assets/logo.png'); ?>" width="50" height="60" alt="Logo Pemda-Tapin">
           </div>
-          <div class="sidebar-brand-text mx-3">Pemda Tapin</div>
+          <div class="sidebar-brand-text mx-3">BKK SMK</div>
         </a>
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
@@ -61,47 +61,8 @@
           </a>
           <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="<?= base_url('admin/jabatan') ?>">Data Jabatan</a>
-              <a class="collapse-item" href="<?= base_url('admin/bidang') ?>">Data Bidang</a>
-              <a class="collapse-item" href="<?= base_url('atk/view_data') ?>">Data ATK</a>
-            </div>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Order</span>
-          </a>
-          <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="<?= base_url('order_barang/order_persetujuan') ?>">Order Persetujuan</a>
-              <a class="collapse-item" href="<?= base_url('order') ?>">Order Tunggu</a>
-
-            </div>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo2" aria-expanded="true" aria-controls="collapseTwo2">
-            <i class="fas fa-table"></i>
-            <span>Laporan Order ATK</span>
-          </a>
-          <div id="collapseTwo2" class="collapse" aria-labelledby="headingTwo2" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="<?= base_url('order/laporan_bulanan') ?>">Laporan Order Bulanan</a>
-              <a class="collapse-item" href="<?= base_url('order/laporan_bidang') ?>">Laporan Bidang</a>
-              <a class="collapse-item" href="<?= base_url('order/order_selesai') ?>">Order Selesai</a>
-              <a class="collapse-item" href="<?= base_url('order/order_ditolak') ?>">Order Ditolak</a>
-            </div>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pegawai" aria-expanded="true" aria-controls="pegawai">
-            <i class="fas fa-database"></i>
-            <span>Kepegawaian</span>
-          </a>
-          <div id="pegawai" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="<?= base_url('admin/pegawai') ?>">Data Pegawai</a>
+              <a class="collapse-item" href="<?= base_url('admin/jurusan') ?>">JURUSAN</a>
+              <a class="collapse-item" href="<?= base_url('admin/pkerja') ?>">Data Pencari Kerja</a>
             </div>
           </div>
         </li>
@@ -110,14 +71,12 @@
         <li class="nav-item">
           <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Pengajuan" aria-expanded="true" aria-controls="Pengajuan">
             <i class="fas fa-database"></i>
-            <span>Pengajuan Gaji Berkala</span>
+            <span>Lowongan Kerja</span>
           </a>
           <div id="Pengajuan" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="<?= base_url('admin/cek_pengajuan') ?>">Pengajuan Baru</a>
-              <a class="collapse-item" href="<?= base_url('admin/semua_pengajuan_diterima') ?>">Pengajuan Diterima</a>
-              <a class="collapse-item" href="<?= base_url('admin/semua_pengajuan_ditolak') ?>">Pengajuan Ditolak</a>
-              <a class="collapse-item" href="<?= base_url('admin/pengajuan_tahun') ?>">Pengajuan Tahun <?= date('Y') ?></a>
+              <a class="collapse-item" href="<?= base_url('admin/cek_pengajuan') ?>">Buat Lowongan</a>
+              <a class="collapse-item" href="<?= base_url('admin/cek_pengajuan') ?>">Pengajuan Kerja</a>
             </div>
           </div>
         </li>

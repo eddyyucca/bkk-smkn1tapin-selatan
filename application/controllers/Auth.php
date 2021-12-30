@@ -53,7 +53,8 @@ class Auth extends CI_Controller
         $this->email->from('no-reply@smkn1tapinselatan.sch.id', 'smkn1tapinselatan.sch.id');
 
         // Email penerima
-        $this->email->to('eddyyucca@gmail.com'); // Ganti dengan email tujuan
+        $email = $this->input->post('email');
+        $this->email->to($email); // Ganti dengan email tujuan
 
         // Lampiran email, isi dengan url/path file
         // $this->email->attach('https://images.pexels.com/photos/169573/pexels-photo-169573.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
@@ -62,11 +63,21 @@ class Auth extends CI_Controller
         $this->email->subject('Email Aktivasi Pendaftaran Akun Bursa Kerja Khusus (BKK)');
 
         // Isi email
-        $aktifasi = 3;
-        $this->email->message("Ini adalah Kode Aktivasi " . str_pad(rand(0, pow(10, $aktifasi) - 1), $aktifasi, '0', STR_PAD_LEFT));
+        $aktifasi = 6;
+        $kode = str_pad(rand(0, pow(10, $aktifasi) - 1), $aktifasi, '0', STR_PAD_LEFT);
+        $this->email->message("Ini adalah Kode Aktivasi " . $kode);
 
         // Tampilkan pesan sukses atau error
         if ($this->email->send()) {
+            $data = array(
+                'email' => $this->input->post('email'),
+                'password' => md5($this->input->post('password')),
+                'level' => 'user',
+                'aktivasi' => $kode,
+                'status' => 'belum aktif',
+            );
+            $this->db->insert('akun', $data);
+
             echo 'Sukses! email berhasil dikirim.';
         } else {
             echo 'Error! email tidak dapat dikirim.';

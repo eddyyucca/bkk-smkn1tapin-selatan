@@ -20,6 +20,58 @@ class Auth extends CI_Controller
         $this->load->view('auth/index', $data);
         $this->load->view('auth/template_auth/footer', $data);
     }
+    public function daftar()
+    {
+        $data['data'] = false;
+        $data['pesan'] = $this->session->flashdata('pesan');
+        $data['judul'] = 'Login';
+        $this->load->view('auth/template_auth/header', $data);
+        $this->load->view('auth/daftar', $data);
+        $this->load->view('auth/template_auth/footer', $data);
+    }
+
+    public function kirim_email()
+    {
+        // Konfigurasi email
+        $config = [
+            'mailtype'  => 'html',
+            'charset'   => 'utf-8',
+            'protocol'  => 'smtp',
+            'smtp_host' => 'smtp.gmail.com',
+            'smtp_user' => 'smk1tapinselatan@gmail.com',  // Email gmail
+            'smtp_pass'   => 'smkbisa123',  // Password gmail
+            'smtp_crypto' => 'ssl',
+            'smtp_port'   => 465,
+            'crlf'    => "\r\n",
+            'newline' => "\r\n"
+        ];
+
+        // Load library email dan konfigurasinya
+        $this->load->library('email', $config);
+
+        // Email dan nama pengirim
+        $this->email->from('no-reply@smkn1tapinselatan.sch.id', 'smkn1tapinselatan.sch.id');
+
+        // Email penerima
+        $this->email->to('eddyyucca@gmail.com'); // Ganti dengan email tujuan
+
+        // Lampiran email, isi dengan url/path file
+        // $this->email->attach('https://images.pexels.com/photos/169573/pexels-photo-169573.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+
+        // Subject email
+        $this->email->subject('Email Aktivasi Pendaftaran Akun Bursa Kerja Khusus (BKK)');
+
+        // Isi email
+        $aktifasi = 3;
+        $this->email->message("Ini adalah Kode Aktivasi " . str_pad(rand(0, pow(10, $aktifasi) - 1), $aktifasi, '0', STR_PAD_LEFT));
+
+        // Tampilkan pesan sukses atau error
+        if ($this->email->send()) {
+            echo 'Sukses! email berhasil dikirim.';
+        } else {
+            echo 'Error! email tidak dapat dikirim.';
+        }
+    }
     public function user_login()
     {
         $data['data'] = false;

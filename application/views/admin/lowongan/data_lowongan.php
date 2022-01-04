@@ -2,19 +2,18 @@
     <!-- Page Heading -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold ">Tabel History Pengajuan</h6>
+            <h6 class="m-0 font-weight-bold ">Tabel Lowongan</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
-
+                <a href="<?= base_url('admin/buat_lowongan_baru') ?>" class="btn btn-primary">Buat Lowngan Baru</a>
+                <hr>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>NIP</th>
-                            <th>Nama</th>
-                            <th>Tanggal Pengajuan</th>
-                            <th>Status Pengajuan</th>
+                            <th>Nama Lowongan</th>
+                            <th>Jumlah Pelamar</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -24,14 +23,11 @@
                         foreach ($data as $x) { ?>
                             <tr>
                                 <td><?= $nomor++; ?></td>
-                                <td><?= $x->nip; ?></td>
-                                <td><?= $x->nama_lengkap; ?></td>
-                                <td><?= $x->date; ?></td>
-                                <td><?= $x->status_pengajuan; ?></td>
+                                <td><?= $x->nama_lowongan; ?></td>
+                                <td><?= "tes" ?></td>
                                 <td align="center">
-                                    <a href="<?= base_url('assets/file_pengajuan/' . $x->file) ?>" target="_blank" class="btn btn-primary">Cek Berkas</a>
-                                    <a href="<?= base_url('admin/pengajuan_diterima/' . $x->id_berkas) ?>" class="btn btn-success">Berkas Diterima</a>
-                                    <a href="<?= base_url('admin/pengajuan_ditolak/' . $x->id_berkas) ?>" class="btn btn-danger">Berkas Ditolak</a>
+                                    <a href="<?= base_url('admin/pengajuan_diterima/' . $x->id_lowongan) ?>" class="btn btn-success">Ubah</a>
+                                    <a href="<?= base_url('admin/pengajuan_ditolak/' . $x->id_lowongan) ?>" class="btn btn-primary">Lihat Pelamar</a>
                                 </td>
                             </tr>
                         <?php } ?>

@@ -61,7 +61,7 @@
           </a>
           <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="<?= base_url('admin/jurusan') ?>">JURUSAN</a>
+              <a class="collapse-item" href="<?= base_url('admin/jurusan') ?>">Jurusan</a>
               <a class="collapse-item" href="<?= base_url('admin/pkerja') ?>">Data Pencari Kerja</a>
             </div>
           </div>
@@ -75,7 +75,7 @@
           </a>
           <div id="Pengajuan" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="<?= base_url('admin/cek_pengajuan') ?>">Buat Lowongan</a>
+              <a class="collapse-item" href="<?= base_url('admin/data_lowongan') ?>">Buat Lowongan</a>
               <a class="collapse-item" href="<?= base_url('admin/cek_pengajuan') ?>">Pengajuan Kerja</a>
             </div>
           </div>

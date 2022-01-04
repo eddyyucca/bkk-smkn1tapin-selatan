@@ -356,13 +356,13 @@ class Admin extends CI_Controller
 
     // menerima pengajuan  
     // -------------------- //
-    public function buat_lowongan()
+    public function data_lowongan()
     {
         $data['judul'] = 'Data Lowongan';
         $data['data'] = $this->lowongan_m->get_all_lowongan();
         $data['nama'] = $this->session->userdata('nama_lengkap');
         $this->load->view('template/header', $data);
-        $this->load->view('admin/lowongan/buat_lowongan', $data);
+        $this->load->view('admin/lowongan/data_lowongan', $data);
         $this->load->view('template/footer');
     }
 }

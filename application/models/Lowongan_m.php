@@ -7,6 +7,6 @@ class Lowongan_m extends CI_Model
     public function get_all_lowongan()
     {
         $this->db->order_by('id_lowongan', 'DESC');
-        return  $this->db->get('lowongan');
+        return  $this->db->get('lowongan')->result();
     }
 }/* End of file Lowongan_m.php */

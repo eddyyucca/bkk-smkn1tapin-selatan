@@ -4,16 +4,16 @@
     <!-- Page Heading -->
     <div class="card">
         <div class="card-header">
-            <a href="<?= base_url('admin/bidang') ?>"><i class="fas fa-arrow-circle-left"> Kembali</i></a>
+            <a href="<?= base_url('admin/jurusan') ?>"><i class="fas fa-arrow-circle-left"> Kembali</i></a>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="container-fluid">
                     <?= validation_errors() ?>
-                    <form action="<?= base_url('admin/proses_update_bidang/' . $data->id_bidang)  ?>" method="POST">
+                    <form action="<?= base_url('admin/proses_input_jurusan')  ?>" method="POST">
                         <div class="form-group">
-                            <label for="inputItem">Nama Bidang</label>
-                            <input type="text" class="form-control" id="nama_bidang" name="nama_bidang" placeholder="Nama Bidang" value="<?= $data->nama_bidang ?>">
+                            <label for="inputItem">Nama jurusan</label>
+                            <input type="text" class="form-control" id="nama_jurusan" name="nama_jurusan" placeholder="Nama jurusan">
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Simpan</button>

@@ -8,10 +8,10 @@ class Admin extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
-        $this->load->model('jabatan_m');
-        $this->load->model('pegawai_m');
-        $this->load->model('bidang_m');
-        $this->load->model('pengajuan_m');
+        // $this->load->model('jabatan_m');
+        $this->load->model('lowongan_m');
+        $this->load->model('jurusan_m');
+        // $this->load->model('pengajuan_m');
 
         // $level_akun = $this->session->userdata('level');
         // if ($level_akun != "admin") {
@@ -26,179 +26,104 @@ class Admin extends CI_Controller
         $data['data'] = false;
         $data['judul'] = 'Dashboard';
 
-        $data['jml_pegawai'] = $this->pegawai_m->jumlah_pegawai();
-        $data['jml_bidang'] = $this->pegawai_m->jumlah_bidang();
-        $data['jml_absen'] = $this->pegawai_m->jumlah_absen();
-        $bulan1 = "1";
-        $bulan = "08";
-        $data['bulan1'] = $this->pegawai_m->jumlah_absen_bulan("01");
-        $data['bulan2'] = $this->pegawai_m->jumlah_absen_bulan("02");
-        $data['bulan3'] = $this->pegawai_m->jumlah_absen_bulan("03");
-        $data['bulan4'] = $this->pegawai_m->jumlah_absen_bulan("04");
-        $data['bulan5'] = $this->pegawai_m->jumlah_absen_bulan("05");
-        $data['bulan6'] = $this->pegawai_m->jumlah_absen_bulan("06");
-        $data['bulan7'] = $this->pegawai_m->jumlah_absen_bulan("07");
-        $data['bulan8'] = $this->pegawai_m->jumlah_absen_bulan("08");
-        $data['bulan9'] = $this->pegawai_m->jumlah_absen_bulan("09");
-        $data['bulan10'] = $this->pegawai_m->jumlah_absen_bulan("10");
-        $data['bulan11'] = $this->pegawai_m->jumlah_absen_bulan("11");
-        $data['bulan12'] = $this->pegawai_m->jumlah_absen_bulan("12");
+        // $data['jml_pegawai'] = $this->pegawai_m->jumlah_pegawai();
+        // $data['jml_jurusan'] = $this->pegawai_m->jumlah_jurusan();
+        // $data['jml_absen'] = $this->pegawai_m->jumlah_absen();
+        // $bulan1 = "1";
+        // $bulan = "08";
+        // $data['bulan1'] = $this->pegawai_m->jumlah_absen_bulan("01");
+        // $data['bulan2'] = $this->pegawai_m->jumlah_absen_bulan("02");
+        // $data['bulan3'] = $this->pegawai_m->jumlah_absen_bulan("03");
+        // $data['bulan4'] = $this->pegawai_m->jumlah_absen_bulan("04");
+        // $data['bulan5'] = $this->pegawai_m->jumlah_absen_bulan("05");
+        // $data['bulan6'] = $this->pegawai_m->jumlah_absen_bulan("06");
+        // $data['bulan7'] = $this->pegawai_m->jumlah_absen_bulan("07");
+        // $data['bulan8'] = $this->pegawai_m->jumlah_absen_bulan("08");
+        // $data['bulan9'] = $this->pegawai_m->jumlah_absen_bulan("09");
+        // $data['bulan10'] = $this->pegawai_m->jumlah_absen_bulan("10");
+        // $data['bulan11'] = $this->pegawai_m->jumlah_absen_bulan("11");
+        // $data['bulan12'] = $this->pegawai_m->jumlah_absen_bulan("12");
 
         $this->load->view('template/header', $data);
         $this->load->view('admin/index', $data);
         $this->load->view('template/footer', $data);
     }
-    // jabatan
+
+    // Jurusan
     // -------------------- //
-    public function jabatan()
+    public function jurusan()
     {
-        $data['judul'] = 'Data Bidang';
+        $data['judul'] = 'Data jurusan';
         $data['nama'] = $this->session->userdata('nama_lengkap');
-        $data['data'] = $this->jabatan_m->get_all_jab();
+        $data['data'] = $this->jurusan_m->get_all_jurusan();
         $this->load->view('template/header', $data);
-        $this->load->view('admin/jabatan/data_jabatan', $data);
+        $this->load->view('admin/jurusan/data_jurusan', $data);
         $this->load->view('template/footer');
     }
-    public function tambah_jabatan()
+    public function tambah_jurusan()
     {
-        $data['judul'] = 'Data Bidang';
+        $data['judul'] = 'Data jurusan';
         $data['nama'] = $this->session->userdata('nama_lengkap');
         $this->load->view('template/header', $data);
-        $this->load->view('admin/jabatan/input_jabatan', $data);
+        $this->load->view('admin/jurusan/input_jurusan', $data);
         $this->load->view('template/footer');
     }
-    public function edit_jabatan($id_bidang)
+    public function edit_jurusan($id_jurusan)
     {
-        $data['judul'] = 'Data Bidang';
+        $data['judul'] = 'Data jurusan';
         $data['nama'] = $this->session->userdata('nama_lengkap');
-        $data['data'] = $this->jabatan_m->get_row_jab($id_bidang);
+        $data['data'] = $this->jurusan_m->get_row_jurusan($id_jurusan);
 
         $this->load->view('template/header', $data);
-        $this->load->view('admin/jabatan/edit_jabatan', $data);
+        $this->load->view('admin/jurusan/edit_jurusan', $data);
         $this->load->view('template/footer');
     }
 
-    public function proses_update_jab($id_bidang)
+    public function proses_update_jurusan($id_jurusan)
     {
-        $this->form_validation->set_rules('nama_jab', 'Bidang', 'required');
+        $this->form_validation->set_rules('nama_jurusan', 'jurusan', 'required');
         if ($this->form_validation->run() == FALSE) {
-            $data['data'] = $this->jabatan_m->get_row_jab($id_bidang);
-            $data['judul'] = 'Data Bidang';
-            $this->load->view('template/header', $data);
-            $this->load->view('admin/jabatan/edit_jabatan', $data);
-            $this->load->view('template/footer');
-        } else {
-            $data = array(
-                'nama_jab' => $this->input->post('nama_jab')
-            );
-            $this->db->where('id_bidang', $id_bidang);
-            $this->db->update('jabatan', $data);
-            return redirect('admin/jabatan');
-        }
-    }
-
-    public function proses_input_jab()
-    {
-        $this->form_validation->set_rules('nama_jab', 'Jabatan', 'required');
-        if ($this->form_validation->run() == FALSE) {
-            $data['judul'] = 'Data Bidang';
-            $this->load->view('template/header', $data);
-            $this->load->view('admin/jabatan/input_jabatan', $data);
-            $this->load->view('template/footer');
-        } else {
-            $data = array(
-                'nama_jab' => $this->input->post('nama_jab')
-            );
-            $this->db->insert('jabatan', $data);
-            return redirect('admin/jabatan');
-        }
-    }
-
-    public function hapus_jabatan($id_jab)
-    {
-        $this->db->where('id_jab', $id_jab);
-        $this->db->delete('jabatan');
-        return redirect('admin/jabatan');
-    }
-
-    // jabatan end
-    // -------------------- //
-
-    // bidang
-    // -------------------- //
-    public function bidang()
-    {
-        $data['judul'] = 'Data Bidang';
-        $data['nama'] = $this->session->userdata('nama_lengkap');
-        $data['data'] = $this->bidang_m->get_all_bidang();
-        $this->load->view('template/header', $data);
-        $this->load->view('admin/bidang/data_bidang', $data);
-        $this->load->view('template/footer');
-    }
-    public function tambah_bidang()
-    {
-        $data['judul'] = 'Data Bidang';
-        $data['nama'] = $this->session->userdata('nama_lengkap');
-        $this->load->view('template/header', $data);
-        $this->load->view('admin/bidang/input_bidang', $data);
-        $this->load->view('template/footer');
-    }
-    public function edit_bidang($id_bidang)
-    {
-        $data['judul'] = 'Data Bidang';
-        $data['nama'] = $this->session->userdata('nama_lengkap');
-        $data['data'] = $this->bidang_m->get_row_bidang($id_bidang);
-
-        $this->load->view('template/header', $data);
-        $this->load->view('admin/bidang/edit_bidang', $data);
-        $this->load->view('template/footer');
-    }
-
-    public function proses_update_bidang($id_bidang)
-    {
-        $this->form_validation->set_rules('nama_bidang', 'Bidang', 'required');
-        if ($this->form_validation->run() == FALSE) {
-            $data['data'] = $this->bidang_m->get_row_bidang($id_bidang);
-            $data['judul'] = 'Data Bidang';
+            $data['data'] = $this->jurusan_m->get_row_jurusan($id_jurusan);
+            $data['judul'] = 'Data jurusan';
             $data['nama'] = $this->session->userdata('nama_lengkap');
             $this->load->view('template/header', $data);
-            $this->load->view('admin/bidang/edit_bidang', $data);
+            $this->load->view('admin/jurusan/edit_jurusan', $data);
             $this->load->view('template/footer');
         } else {
             $data = array(
-                'nama_bidang' => $this->input->post('nama_bidang')
+                'nama_jurusan' => $this->input->post('nama_jurusan')
             );
-            $this->db->where('id_bidang', $id_bidang);
-            $this->db->update('bidang', $data);
-            return redirect('admin/bidang');
+            $this->db->where('id_jurusan', $id_jurusan);
+            $this->db->update('jurusan', $data);
+            return redirect('admin/jurusan');
         }
     }
-    public function proses_input_bidang()
+    public function proses_input_jurusan()
     {
-        $this->form_validation->set_rules('nama_bidang', 'Bidang', 'required');
+        $this->form_validation->set_rules('nama_jurusan', 'jurusan', 'required');
         if ($this->form_validation->run() == FALSE) {
 
-            $data['judul'] = 'Data Bidang';
+            $data['judul'] = 'Data jurusan';
             $data['nama'] = $this->session->userdata('nama_lengkap');
             $this->load->view('template/header', $data);
-            $this->load->view('admin/bidang/input_bidang', $data);
+            $this->load->view('admin/jurusan/input_jurusan', $data);
             $this->load->view('template/footer');
         } else {
             $data = array(
-                'nama_bidang' => $this->input->post('nama_bidang')
+                'nama_jurusan' => $this->input->post('nama_jurusan')
             );
-            $this->db->insert('bidang', $data);
-            return redirect('admin/bidang');
+            $this->db->insert('jurusan', $data);
+            return redirect('admin/jurusan');
         }
     }
-    public function hapus_bidang($id_bidang)
+    public function hapus_jurusan($id_jurusan)
     {
-        $this->db->where('id_bidang', $id_bidang);
-        $this->db->delete('bidang');
-        return redirect('admin/bidang');
+        $this->db->where('id_jurusan', $id_jurusan);
+        $this->db->delete('jurusan');
+        return redirect('admin/jurusan');
     }
 
-    // bidang end
+    // jurusan end
     // -------------------- //
 
 
@@ -243,11 +168,11 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('hobi', 'Hobi', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
-        $this->form_validation->set_rules('bidang', 'Bidang', 'required');
+        $this->form_validation->set_rules('jurusan', 'jurusan', 'required');
         if ($this->form_validation->run() == FALSE) {
             $data['judul'] = 'Data Pegawai';
             $data['nama'] = $this->session->userdata('nama_lengkap');
-            $data['bidang'] = $this->bidang_m->get_all_bidang();
+            $data['jurusan'] = $this->jurusan_m->get_all_jurusan();
             $data['jabatan'] = $this->jabatan_m->get_all_jab();
 
             $this->load->view('template/header', $data);
@@ -283,7 +208,7 @@ class Admin extends CI_Controller
                 'no_telp' => $this->input->post('no_telp'),
                 'agama' => $this->input->post('agama'),
                 'jabatan' => $this->input->post('jabatan'),
-                'bidang' => $this->input->post('bidang'),
+                'jurusan' => $this->input->post('jurusan'),
                 'hobi' => $this->input->post('hobi'),
                 'email' => $this->input->post('email'),
                 'mulai_bekerja' => $this->input->post('mulai_bekerja'),
@@ -356,11 +281,11 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('mulai_bekerja', 'Mulai Bekerja', 'required');
         $this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
-        $this->form_validation->set_rules('bidang', 'Bidang', 'required');
+        $this->form_validation->set_rules('jurusan', 'jurusan', 'required');
         if ($this->form_validation->run() == FALSE) {
             $data['judul'] = 'Data Pegawai';
             $data['nama'] = $this->session->userdata('nama_lengkap');
-            $data['bidang'] = $this->bidang_m->get_all_bidang();
+            $data['jurusan'] = $this->jurusan_m->get_all_jurusan();
             $data['jabatan'] = $this->jabatan_m->get_all_jab();
             $data['x'] = $this->pegawai_m->get_row_pegawai($id_pegawai);
 
@@ -393,7 +318,7 @@ class Admin extends CI_Controller
                 'no_telp' => $this->input->post('no_telp'),
                 'agama' => $this->input->post('agama'),
                 'jabatan' => $this->input->post('jabatan'),
-                'bidang' => $this->input->post('bidang'),
+                'jurusan' => $this->input->post('jurusan'),
                 'hobi' => $this->input->post('hobi'),
                 'email' => $this->input->post('email'),
                 'mulai_bekerja' => $this->input->post('mulai_bekerja'),
@@ -431,149 +356,14 @@ class Admin extends CI_Controller
 
     // menerima pengajuan  
     // -------------------- //
-    public function cek_pengajuan()
+    public function buat_lowongan()
     {
-        $data['judul'] = 'Data Pengajuan';
-        $data['data'] = $this->pengajuan_m->get_all_pengajuan_baru();
+        $data['judul'] = 'Data Lowongan';
+        $data['data'] = $this->lowongan_m->get_all_lowongan();
         $data['nama'] = $this->session->userdata('nama_lengkap');
         $this->load->view('template/header', $data);
-        $this->load->view('admin/pengajuan/pengajuan_baru', $data);
+        $this->load->view('admin/lowongan/buat_lowongan', $data);
         $this->load->view('template/footer');
-    }
-    public function semua_pengajuan_ditolak()
-    {
-        $data['judul'] = 'Data Pengajuan Ditolak';
-        $data['data'] = $this->pengajuan_m->get_all_pengajuan_ditolak();
-        $data['nama'] = $this->session->userdata('nama_lengkap');
-        $this->load->view('template/header', $data);
-        $this->load->view('admin/pengajuan/pengajuan_ditolak', $data);
-        $this->load->view('template/footer');
-    }
-    public function cetak_semua_pengajuan_ditolak()
-    {
-        $data['judul'] = 'Data Pengajuan Ditolak';
-        $data['data'] = $this->pengajuan_m->get_all_pengajuan_ditolak();
-        $data['nama'] = $this->session->userdata('nama_lengkap');
-        // $this->load->view('template/header', $data);
-        $this->load->view('admin/pengajuan/cetak_pengajuan_ditolak', $data);
-        // $this->load->view('template/footer');
-    }
-    public function semua_pengajuan_diterima()
-    {
-        $data['judul'] = 'Data Pengajuan Ditolak';
-        $data['data'] = $this->pengajuan_m->get_all_pengajuan_diterima();
-        $data['nama'] = $this->session->userdata('nama_lengkap');
-        $this->load->view('template/header', $data);
-        $this->load->view('admin/pengajuan/pengajuan_diterima', $data);
-        $this->load->view('template/footer');
-    }
-    public function cetak_semua_pengajuan_diterima()
-    {
-        $data['judul'] = 'Data Pengajuan Ditolak';
-        $data['data'] = $this->pengajuan_m->get_all_pengajuan_diterima();
-        $data['nama'] = $this->session->userdata('nama_lengkap');
-        // $this->load->view('template/header', $data);
-        $this->load->view('admin/pengajuan/cetak_pengajuan_diterima', $data);
-        // $this->load->view('template/footer');
-    }
-    public function pengajuan_tahun()
-    {
-        $tahun = date('Y');
-        $data['judul'] = 'Data Pengajuan Tahun ' . $tahun;
-        $data['data'] = $this->pengajuan_m->tahun_pengajuan();
-        $data['nama'] = $this->session->userdata('nama_lengkap');
-        $this->load->view('template/header', $data);
-        $this->load->view('admin/pengajuan/cari_pengajuan', $data);
-        $this->load->view('template/footer');
-    }
-    public function belum_pengajuan()
-    {
-        $tahun = date('Y');
-        $data['judul'] = 'Data Pengajuan Tahun ' . $tahun;
-        $data['data'] = $this->pengajuan_m->tahun_pengajuan_belum_masuk();
-        $data['peg'] = $this->pegawai_m->get_all_pegawai();
-        $data['nama'] = $this->session->userdata('nama_lengkap');
-        $this->load->view('template/header', $data);
-        $this->load->view('admin/pengajuan/belum_pengajuan', $data);
-        $this->load->view('template/footer');
-    }
-
-    public function pengajuan_diterima($id_berkas)
-    {
-        $data = array(
-            "status_pengajuan" => "Diterima"
-        );
-
-        $this->db->where('id_berkas', $id_berkas);
-        $this->db->update('berkas', $data);
-        return redirect('admin/cek_pengajuan');
-    }
-    public function pengajuan_ditolak($id_berkas)
-    {
-        $data = array(
-            "status_pengajuan" => "Ditolak"
-        );
-
-        $this->db->where('id_berkas', $id_berkas);
-        $this->db->update('berkas', $data);
-        return redirect('admin/cek_pengajuan');
-    }
-    public function proses_pengajuan($id_pengajuan)
-    {
-        $data = array();
-
-        $this->db->where('id_pengajuan', $id_pengajuan);
-        $this->db->update('pengajuan', $data);
-        return redirect('data_pengajuan');
-    }
-    //end menerima pengajuan
-    public function absen($id_peg)
-    {
-
-        $data['judul'] = 'Absensi';
-        $data['absen'] = $this->pegawai_m->absen($id_peg);
-        $data['id_peg'] = $id_peg;
-        $data['nama'] = $this->session->userdata('nama_lengkap');
-        $this->load->view('template/header', $data);
-        $this->load->view('admin/absen/view_absen', $data);
-        $this->load->view('template/footer');
-    }
-    public function view_absen_tanggal()
-    {
-        $id_peg = $this->input->post('id_peg');
-        $data['id_peg'] = $id_peg;
-        $date1 =  $this->input->post('date1');
-        $date2 = $this->input->post('date2');
-        $data['id_peg'] = $this->input->post('id_peg');
-        $data['date1'] =  $this->input->post('date1');
-        $data['date2'] = $this->input->post('date2');
-
-        $data['judul'] = 'Absensi';
-        $data['absen'] = $this->pegawai_m->cari_bulan_absen($date1, $date2, $id_peg);
-
-        $data['nama'] = $this->session->userdata('nama_lengkap');
-        $this->load->view('template/header', $data);
-        $this->load->view('admin/absen/view_absen_tanggal', $data);
-        $this->load->view('template/footer');
-    }
-    public function cetak_view_absen_tanggal()
-    {
-        $id_peg = $this->input->post('id_peg');
-        $id_pegawai = $this->input->post('id_peg');
-        $date1 =  $this->input->post('date1');
-        $date2 = $this->input->post('date2');
-        $data['id_peg'] = $this->input->post('id_peg');
-        $data['id_peg'] = $this->input->post('id_peg');
-        $data['date1'] =  $this->input->post('date1');
-        $data['date2'] = $this->input->post('date2');
-        $data['data_peg'] = $this->pegawai_m->get_row_pegawai_nip($id_pegawai);
-        $data['judul'] = 'Absensi';
-        $data['absen'] = $this->pegawai_m->cari_bulan_absen($date1, $date2, $id_peg);
-
-        $data['nama'] = $this->session->userdata('nama_lengkap');
-        // $this->load->view('template/header', $data);
-        $this->load->view('admin/absen/cetak_view_absen_tanggal', $data);
-        // $this->load->view('template/footer');
     }
 }
 

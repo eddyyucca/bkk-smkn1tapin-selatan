@@ -139,52 +139,31 @@ class Admin extends CI_Controller
         $this->load->view('admin/lowongan/input_lowongan', $data);
         $this->load->view('template/footer');
     }
-    public function cetak_pegawai()
-    {
-        $data['judul'] = 'Data Pegawai';
-        $data['nama'] = $this->session->userdata('nama_lengkap');
-        $data['data'] = $this->pegawai_m->get_all_pegawai();
-
-        // $this->load->view('template/header', $data);
-        $this->load->view('admin/pegawai/cetak_data_pegawai', $data);
-        // $this->load->view('template/footer');
-    }
 
     public function proses_input_lowongan()
     {
-        $this->form_validation->set_rules('nip', 'NIP', 'required|is_unique[pegawai.nip]');
+        $this->form_validation->set_rules('nama_lowongan', 'Nama Lowongan', 'required');
+        $this->form_validation->set_rules('nama_perusahaan', 'Nama Perusahaan');
+        $this->form_validation->set_rules('batas_tanggal', 'Batas Tanggal');
+        $this->form_validation->set_rules('isi_lowongan', 'Isi Lowongan');
         if ($this->form_validation->run() == FALSE) {
             $data['judul'] = 'Lowongan Baru';
             $data['nama'] = $this->session->userdata('nama_lengkap');
             $data['jurusan'] = $this->jurusan_m->get_all_jurusan();
-            $data['jabatan'] = $this->jabatan_m->get_all_jab();
 
             $this->load->view('template/header', $data);
-            $this->load->view('admin/pegawai/input_pegawai', $data);
+            $this->load->view('admin/lowongan/input_lowongan', $data);
             $this->load->view('template/footer');
         } else {
-
-            $nip = $this->input->post('nip');
-            $config['upload_path']   = './assets/foto_profil/';
-            $config['allowed_types'] = 'gif|jpg|png|jpeg';
-            $config['remove_space'] = TRUE;
-            //$config['max_size']      = 100; 
-            //$config['max_width']     = 1024; 
-            //$config['max_height']    = 768;  
-
-            $this->load->library('upload', $config);
-            // script upload file 1
-            $this->upload->do_upload('foto');
-            $x = $this->upload->data();
-
-
-
             $data = array(
-                'nip' => $this->input->post('nip'),
+                'nama_lowongan' => $this->input->post('nama_lowongan'),
+                'nama_perusahaan' => $this->input->post('nama_perusahaan'),
+                'batas_tanggal' => $this->input->post('batas_tanggal'),
+                'isi_lowongan' => $this->input->post('isi_lowongan'),
             );
 
-            $this->db->insert('berkas', '');
-            return redirect('admin/pegawai');
+            $this->db->insert('lowongan', $data);
+            return redirect('admin/data_lowongan');
         }
     }
 

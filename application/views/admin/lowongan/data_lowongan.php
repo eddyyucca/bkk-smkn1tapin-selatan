@@ -13,7 +13,8 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Lowongan</th>
-                            <th>Jumlah Pelamar</th>
+                            <th>Perusahaan/Instansi</th>
+                            <th>Batas Waktu</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -24,7 +25,8 @@
                             <tr>
                                 <td><?= $nomor++; ?></td>
                                 <td><?= $x->nama_lowongan; ?></td>
-                                <td><?= "tes" ?></td>
+                                <td><?= $x->nama_perusahaan; ?></td>
+                                <td><?= $x->batas_tanggal; ?></td>
                                 <td align="center">
                                     <a href="<?= base_url('admin/pengajuan_diterima/' . $x->id_lowongan) ?>" class="btn btn-success">Ubah</a>
                                     <a href="<?= base_url('admin/pengajuan_ditolak/' . $x->id_lowongan) ?>" class="btn btn-primary">Lihat Pelamar</a>

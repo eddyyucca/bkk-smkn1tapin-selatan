@@ -13,20 +13,20 @@
                     <form action="<?= base_url('admin/proses_input_lowongan')  ?>" method="POST">
                         <div class="form-group">
                             <label for="inputItem">Nama Lowongan</label>
-                            <input type="text" class="form-control" id="nama_lowongan" name="nama_lowongan" placeholder="Nama Lowongan">
+                            <input type="text" class="form-control" id="nama_lowongan" name="nama_lowongan" placeholder="Nama Lowongan" value="<?= $data->nama_lowongan ?>">
                         </div>
                         <div class="form-group">
                             <label for="inputItem">Perusahaan/Instansi</label>
-                            <input type="text" class="form-control" id="nama_perusahaan" name="nama_perusahaan" placeholder="Nama Perusahaan/isntansi">
+                            <input type="text" class="form-control" id="nama_perusahaan" name="nama_perusahaan" value="<?= $data->nama_perusahaan ?>" placeholder="Nama Perusahaan/isntansi">
                         </div>
                         <div class="form-group">
                             <label for="inputItem">Batas Tanggal</label>
-                            <input type="date" class="form-control" id="batas_tanggal" name="batas_tanggal" placeholder="Batas Tanggal">
+                            <input type="date" class="form-control" id="batas_tanggal" name="batas_tanggal" value="<?= $data->batas_tanggal ?>" placeholder="Batas Tanggal">
                         </div>
 
                         <div class="form-group">
                             <label for="inputItem">Isi Lowongan</label>
-                            <textarea class="form-control" name="isi_lowongan" rows="5"></textarea>
+                            <textarea class="form-control" name="isi_lowongan" rows="5"> <?= $data->batas_tanggal ?>" </textarea>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Simpan</button>

@@ -129,14 +129,14 @@ class Admin extends CI_Controller
 
     // Pegawai
     // -------------------- //
-    public function pegawai()
+    public function buat_lowongan_baru()
     {
         $data['judul'] = 'Data Pegawai';
         $data['nama'] = $this->session->userdata('nama_lengkap');
-        $data['data'] = $this->pegawai_m->get_all_pegawai();
+        // $data['data'] = $this->pegawai_m->get_all_pegawai();
 
         $this->load->view('template/header', $data);
-        $this->load->view('admin/pegawai/data_pegawai', $data);
+        $this->load->view('admin/lowongan/input_lowongan', $data);
         $this->load->view('template/footer');
     }
     public function cetak_pegawai()
@@ -150,27 +150,11 @@ class Admin extends CI_Controller
         // $this->load->view('template/footer');
     }
 
-
-    public function tambah_pegawai_baru()
+    public function proses_input_lowongan()
     {
         $this->form_validation->set_rules('nip', 'NIP', 'required|is_unique[pegawai.nip]');
-        $this->form_validation->set_rules('no_ktp', 'No KTP', 'required');
-        $this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required');
-        $this->form_validation->set_rules('nama_panggilan', 'Nama Panggilan', 'required');
-        $this->form_validation->set_rules('jk', 'Jenis Kelamin', 'required');
-        $this->form_validation->set_rules('tempat', 'Tempat', 'required');
-        $this->form_validation->set_rules('ttl', 'Tanggal Lahir', 'required');
-        $this->form_validation->set_rules('alamat_saat_ini', 'Alamat Saat Ini', 'required');
-        $this->form_validation->set_rules('alamat_permanen', 'Alamat Permanen', 'required');
-        $this->form_validation->set_rules('no_telp', 'No Telpon', 'required');
-        $this->form_validation->set_rules('agama', 'Agama', 'required');
-        $this->form_validation->set_rules('mulai_bekerja', 'Mulai Bekerja', 'required');
-        $this->form_validation->set_rules('hobi', 'Hobi', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required');
-        $this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
-        $this->form_validation->set_rules('jurusan', 'jurusan', 'required');
         if ($this->form_validation->run() == FALSE) {
-            $data['judul'] = 'Data Pegawai';
+            $data['judul'] = 'Lowongan Baru';
             $data['nama'] = $this->session->userdata('nama_lengkap');
             $data['jurusan'] = $this->jurusan_m->get_all_jurusan();
             $data['jabatan'] = $this->jabatan_m->get_all_jab();
@@ -197,39 +181,9 @@ class Admin extends CI_Controller
 
             $data = array(
                 'nip' => $this->input->post('nip'),
-                'no_ktp' => $this->input->post('no_ktp'),
-                'nama_lengkap' => $this->input->post('nama_lengkap'),
-                'nama_panggilan' => $this->input->post('nama_panggilan'),
-                'jk' => $this->input->post('jk'),
-                'tempat' => $this->input->post('tempat'),
-                'ttl' => $this->input->post('ttl'),
-                'alamat_saat_ini' => $this->input->post('alamat_saat_ini'),
-                'alamat_permanen' => $this->input->post('alamat_permanen'),
-                'no_telp' => $this->input->post('no_telp'),
-                'agama' => $this->input->post('agama'),
-                'jabatan' => $this->input->post('jabatan'),
-                'jurusan' => $this->input->post('jurusan'),
-                'hobi' => $this->input->post('hobi'),
-                'email' => $this->input->post('email'),
-                'mulai_bekerja' => $this->input->post('mulai_bekerja'),
-                'foto' =>  $x["orig_name"],
-                'status_pegawai' => "Aktif"
-            );
-            $akun = array(
-                'nip' => $this->input->post('nip'),
-                'password' => md5($nip),
-                'level' => "user",
             );
 
-            $file = array(
-                'nip' => $this->input->post('nip'),
-                'date' => $this->input->post('mulai_bekerja'),
-                'status_pengajuan' => "Diterima"
-            );
-
-            $this->db->insert('pegawai', $data);
-            $this->db->insert('akun', $akun);
-            $this->db->insert('berkas', $file);
+            $this->db->insert('berkas', '');
             return redirect('admin/pegawai');
         }
     }

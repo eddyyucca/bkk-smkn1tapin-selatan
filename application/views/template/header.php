@@ -62,7 +62,7 @@
           <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
               <a class="collapse-item" href="<?= base_url('admin/jurusan') ?>">Jurusan</a>
-              <a class="collapse-item" href="<?= base_url('admin/pkerja') ?>">Data Pencari Kerja</a>
+              <a class="collapse-item" href="<?= base_url('admin/alumni') ?>">Data Pencari Kerja</a>
             </div>
           </div>
         </li>

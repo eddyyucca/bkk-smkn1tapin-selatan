@@ -11,7 +11,7 @@ class Admin extends CI_Controller
         // $this->load->model('jabatan_m');
         $this->load->model('lowongan_m');
         $this->load->model('jurusan_m');
-        // $this->load->model('pengajuan_m');
+        $this->load->model('alumni_m');
 
         // $level_akun = $this->session->userdata('level');
         // if ($level_akun != "admin") {
@@ -26,7 +26,7 @@ class Admin extends CI_Controller
         $data['data'] = false;
         $data['judul'] = 'Dashboard';
 
-        // $data['jml_pegawai'] = $this->pegawai_m->jumlah_pegawai();
+        // $data['jml_alumni'] = $this->pegawai_m->jumlah_pegawai();
         // $data['jml_jurusan'] = $this->pegawai_m->jumlah_jurusan();
         // $data['jml_absen'] = $this->pegawai_m->jumlah_absen();
         // $bulan1 = "1";
@@ -297,6 +297,111 @@ class Admin extends CI_Controller
         $this->load->view('template/header', $data);
         $this->load->view('admin/lowongan/data_lowongan', $data);
         $this->load->view('template/footer');
+    }
+
+    public function alumni()
+    {
+        $data['judul'] = 'Data alumni';
+        $data['nama'] = $this->session->userdata('nama_lengkap');
+        $data['data'] = $this->alumni_m->get_all_alumni();
+
+        $this->load->view('template/header', $data);
+        $this->load->view('admin/alumni/data_alumni', $data);
+        $this->load->view('template/footer');
+    }
+    public function cetak_alumni()
+    {
+        $data['judul'] = 'Data alumni';
+        $data['nama'] = $this->session->userdata('nama_lengkap');
+        $data['data'] = $this->alumni_m->get_all_alumni();
+
+        // $this->load->view('template/header', $data);
+        $this->load->view('admin/alumni/cetak_data_alumni', $data);
+        // $this->load->view('template/footer');
+    }
+
+
+    public function tambah_alumni_baru()
+    {
+        $this->form_validation->set_rules('nip', 'NIP', 'required|is_unique[alumni.nip]');
+        $this->form_validation->set_rules('no_ktp', 'No KTP', 'required');
+        $this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required');
+        $this->form_validation->set_rules('nama_panggilan', 'Nama Panggilan', 'required');
+        $this->form_validation->set_rules('jk', 'Jenis Kelamin', 'required');
+        $this->form_validation->set_rules('tempat', 'Tempat', 'required');
+        $this->form_validation->set_rules('ttl', 'Tanggal Lahir', 'required');
+        $this->form_validation->set_rules('alamat_saat_ini', 'Alamat Saat Ini', 'required');
+        $this->form_validation->set_rules('alamat_permanen', 'Alamat Permanen', 'required');
+        $this->form_validation->set_rules('no_telp', 'No Telpon', 'required');
+        $this->form_validation->set_rules('agama', 'Agama', 'required');
+        $this->form_validation->set_rules('mulai_bekerja', 'Mulai Bekerja', 'required');
+        $this->form_validation->set_rules('hobi', 'Hobi', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required');
+        $this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
+        $this->form_validation->set_rules('bidang', 'Bidang', 'required');
+        if ($this->form_validation->run() == FALSE) {
+            $data['judul'] = 'Data alumni';
+            $data['nama'] = $this->session->userdata('nama_lengkap');
+            $data['bidang'] = $this->bidang_m->get_all_bidang();
+            $data['jabatan'] = $this->jabatan_m->get_all_jab();
+
+            $this->load->view('template/header', $data);
+            $this->load->view('admin/alumni/input_alumni', $data);
+            $this->load->view('template/footer');
+        } else {
+
+            $nip = $this->input->post('nip');
+            $config['upload_path']   = './assets/foto_profil/';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['remove_space'] = TRUE;
+            //$config['max_size']      = 100; 
+            //$config['max_width']     = 1024; 
+            //$config['max_height']    = 768;  
+
+            $this->load->library('upload', $config);
+            // script upload file 1
+            $this->upload->do_upload('foto');
+            $x = $this->upload->data();
+
+
+
+            $data = array(
+                'nip' => $this->input->post('nip'),
+                'no_ktp' => $this->input->post('no_ktp'),
+                'nama_lengkap' => $this->input->post('nama_lengkap'),
+                'nama_panggilan' => $this->input->post('nama_panggilan'),
+                'jk' => $this->input->post('jk'),
+                'tempat' => $this->input->post('tempat'),
+                'ttl' => $this->input->post('ttl'),
+                'alamat_saat_ini' => $this->input->post('alamat_saat_ini'),
+                'alamat_permanen' => $this->input->post('alamat_permanen'),
+                'no_telp' => $this->input->post('no_telp'),
+                'agama' => $this->input->post('agama'),
+                'jabatan' => $this->input->post('jabatan'),
+                'bidang' => $this->input->post('bidang'),
+                'hobi' => $this->input->post('hobi'),
+                'email' => $this->input->post('email'),
+                'mulai_bekerja' => $this->input->post('mulai_bekerja'),
+                'foto' =>  $x["orig_name"],
+                'status_alumni' => "Aktif"
+            );
+            $akun = array(
+                'nip' => $this->input->post('nip'),
+                'password' => md5($nip),
+                'level' => "user",
+            );
+
+            $file = array(
+                'nip' => $this->input->post('nip'),
+                'date' => $this->input->post('mulai_bekerja'),
+                'status_pengajuan' => "Diterima"
+            );
+
+            $this->db->insert('alumni', $data);
+            $this->db->insert('akun', $akun);
+            $this->db->insert('berkas', $file);
+            return redirect('admin/alumni');
+        }
     }
 }
 

@@ -22,7 +22,7 @@
                                         echo $this->session->flashdata('pesan')
                                         ?>
                                         <?= validation_errors() ?>
-                                        <form class="user" action="<?= base_url('auth/auth_admin') ?>" method="POST">
+                                        <form class="user" action="<?= base_url('auth/auth') ?>" method="POST">
                                             <div class="form-group mb-4">
                                                 <div class="form-group mb-4">
                                                     <input type="email" class="form-control" name="email" placeholder="Email">
@@ -35,11 +35,6 @@
                                             <button type="submit" class="btn btn-primary btn-user btn-block">
                                                 Masuk
                                             </button>
-                                            <div class="d-flex justify-content-center mb-4 mt-3">
-                                                <small>
-                                                    <a href="<?= base_url('auth/daftar') ?>">Pendaftaran</a>
-                                            </div>
-                                            </small>
                                         </form>
                                         <hr>
                                     </div>

@@ -3,13 +3,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Auth_m extends CI_Model
 {
-
-    public function login($nip, $password)
+    public function login($email, $password)
     {
         $this->db->select('*');
         $this->db->from('akun');
-        $this->db->join('pegawai', 'pegawai.nip = akun.nip');
-        $this->db->where('akun.nip', $nip);
+        $this->db->join('alumni', 'alumni.email = akun.email');
+        $this->db->where('akun.email', $email);
         $this->db->where('password', $password);
         $this->db->limit(1);
         $query = $this->db->get();

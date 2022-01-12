@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Pegawai_m extends CI_Model
+class Alumni_m extends CI_Model
 {
-    public function jumlah_pegawai()
+    public function jumlah_alumni()
     {
-        $query = $this->db->get('pegawai');
+        $query = $this->db->get('alumni');
         if ($query->num_rows() > 0) {
             return $query->num_rows();
         } else {
@@ -44,35 +44,35 @@ class Pegawai_m extends CI_Model
             return 0;
         }
     }
-    public function get_all_pegawai()
+    public function get_all_alumni()
     {
-        $this->db->join('akun', 'akun.nip = pegawai.nip');
-        $this->db->join('jabatan', 'jabatan.id_jab = pegawai.jabatan');
-        $this->db->join('bidang', 'bidang.id_bidang = pegawai.bidang');
-        $this->db->order_by('id_pegawai', 'DESC');
-        return $this->db->get('pegawai')->result();
+        $this->db->join('akun', 'akun.email = alumni.email');
+        $this->db->join('jurusan', 'jurusan.id_jurusan = alumni.jurusan_smk');
+        // $this->db->join('bidang', 'bidang.id_bidang = alumni.bidang');
+        $this->db->order_by('id_alumni', 'DESC');
+        return $this->db->get('alumni')->result();
     }
-    public function get_row_pegawai($id_pegawai)
+    public function get_row_alumni($id_alumni)
     {
-        $this->db->where('id_pegawai', $id_pegawai);
-        $this->db->join('jabatan', 'jabatan.id_jab = pegawai.jabatan');
-        $this->db->join('bidang', 'bidang.id_bidang = pegawai.bidang');
+        $this->db->where('id_alumni', $id_alumni);
+        $this->db->join('jabatan', 'jabatan.id_jab = alumni.jabatan');
+        $this->db->join('bidang', 'bidang.id_bidang = alumni.bidang');
 
-        return $this->db->get('pegawai')->row();
+        return $this->db->get('alumni')->row();
     }
-    public function get_row_pegawai_nip($nip)
+    public function get_row_alumni_nip($nip)
     {
         $this->db->where('nip', $nip);
-        $this->db->join('jabatan', 'jabatan.id_jab = pegawai.jabatan');
-        $this->db->join('bidang', 'bidang.id_bidang = pegawai.bidang');
+        $this->db->join('jabatan', 'jabatan.id_jab = alumni.jabatan');
+        $this->db->join('bidang', 'bidang.id_bidang = alumni.bidang');
 
-        return $this->db->get('pegawai')->row();
+        return $this->db->get('alumni')->row();
     }
 
-    public function get_row_pegawai2($id_pegawai)
+    public function get_row_alumni2($id_alumni)
     {
-        $this->db->where('id_pegawai', $id_pegawai);
-        return $this->db->get('pegawai')->row();
+        $this->db->where('id_alumni', $id_alumni);
+        return $this->db->get('alumni')->row();
     }
 
     public function get_all_pengajuan_admin()
@@ -142,4 +142,4 @@ class Pegawai_m extends CI_Model
     }
 }
 
-/* End of file Pegawai_m.php */
+/* End of file alumni_m.php */

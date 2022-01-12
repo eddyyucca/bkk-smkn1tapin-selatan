@@ -74,7 +74,7 @@
           </a>
           <div id="loker" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="<?= base_url('user/loker') ?>">Cari Loker</a>
+              <a class="collapse-item" href="<?= base_url('user/data_lowongan') ?>">Cari Loker</a>
               <a class="collapse-item" href="<?= base_url('user/loker') ?>">Pengajuan Loker</a>
             </div>
           </div>

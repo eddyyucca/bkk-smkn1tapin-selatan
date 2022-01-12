@@ -5,16 +5,16 @@
     <div class="card-body">
         <div class="card shadow mb-4">
             <div class="card-header">
-                Profil <?= $data->nama_lengkap ?>
+                Profil <?= $data->nama_alumni ?>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-4">
                         <img class="shadow" <?php
-                                            if ($data->foto == false) { ?> src="<?= base_url('assets/images/default.png') ?>" <?php
-                                                                                                                            } else {
-                                                                                                                                ?> src="<?= base_url('assets/foto_profil/' . $data->foto) ?>" <?php
-                                                                                                                                                                                            } ?> "
+                                            if ($data->foto_profil == false) { ?> src="<?= base_url('assets/images/default.png') ?>" <?php
+                                                                                                                                    } else {
+                                                                                                                                        ?> src="<?= base_url('assets/foto_profil/' . $data->foto_profil) ?>" <?php
+                                                                                                                                                                                                            } ?> "
                               alt=" Sarana" class="card-img-top" data-holder-rendered="true" style="height: 275px; width: 225px; display: block;">
 
 
@@ -37,15 +37,15 @@
                         <table class="mt-2 ml-3">
                             <tr>
                                 <td> Nama</td>
-                                <td>: <?= $data->nama_lengkap ?> </td>
+                                <td>: <?= $data->nama_alumni ?> </td>
                             </tr>
                             <tr>
-                                <td> TTL </td>
-                                <td>: <?= $data->tempat ?> <?= $data->ttl ?> </td>
+                                <td> Tanggal Lahir </td>
+                                <td>: <?= $data->tgl_lahir ?> </td>
                             </tr>
                             <tr>
                                 <td> Alamat </td>
-                                <td>: <?= $data->alamat_saat_ini ?> </td>
+                                <td>: <?= $data->alamat ?> </td>
                             </tr>
                             <tr>
                                 <td> Email </td>
@@ -53,11 +53,11 @@
                             </tr>
                             <tr>
                                 <td> No Telpon </td>
-                                <td>: <?= $data->no_telp ?> </td>
+                                <td>: <?= $data->telpon ?> </td>
                             </tr>
                             <tr>
                                 <td> Lulusan</td>
-                                <td>: Teknik Komputer & Jaringan (TKJ)</td>
+                                <td>: <?= $data->nama_jurusan ?> </td>
                             </tr>
                         </table>
                         <hr>

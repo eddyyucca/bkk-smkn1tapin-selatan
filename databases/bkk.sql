@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 04 Jan 2022 pada 03.05
+-- Waktu pembuatan: 12 Jan 2022 pada 09.11
 -- Versi server: 10.4.20-MariaDB
 -- Versi PHP: 7.3.29
 
@@ -29,10 +29,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `akun` (
   `id_akun` int(10) NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `telpon` varchar(255) NOT NULL,
   `password` text NOT NULL,
   `level` enum('admin','user') NOT NULL,
-  `aktivasi` varchar(6) NOT NULL,
   `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -40,65 +39,36 @@ CREATE TABLE `akun` (
 -- Dumping data untuk tabel `akun`
 --
 
-INSERT INTO `akun` (`id_akun`, `email`, `password`, `level`, `aktivasi`, `status`) VALUES
-(12, '1001', 'fae0b27c451c728867a567e8c1bb4e53', 'user', '', ''),
-(14, '666', 'fae0b27c451c728867a567e8c1bb4e53', 'admin', '', ''),
-(15, '1', 'c4ca4238a0b923820dcc509a6f75849b', 'user', '', ''),
-(16, '123123', '787eccab05c22abbc0ca3c3cc389ac4b', 'user', '', ''),
-(17, 'eddyyucca@gmail.com', 'fae0b27c451c728867a567e8c1bb4e53', 'user', '605378', 'belum aktif');
+INSERT INTO `akun` (`id_akun`, `telpon`, `password`, `level`, `status`) VALUES
+(22, '081250653005', 'e10adc3949ba59abbe56e057f20f883e', 'user', 'aktif'),
+(23, '081266666666', 'e10adc3949ba59abbe56e057f20f883e', 'admin', 'aktif');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `berkas`
+-- Struktur dari tabel `alumni`
 --
 
-CREATE TABLE `berkas` (
-  `id_berkas` int(10) NOT NULL,
-  `nip` varchar(20) NOT NULL,
-  `file` text NOT NULL,
-  `date` varchar(10) NOT NULL,
-  `status_pengajuan` varchar(255) NOT NULL
+CREATE TABLE `alumni` (
+  `id_alumni` int(11) NOT NULL,
+  `nama_alumni` varchar(255) NOT NULL,
+  `jurusan_smk` varchar(20) NOT NULL,
+  `pendidikan_t` varchar(255) NOT NULL,
+  `tgl_lahir` varchar(50) NOT NULL,
+  `alamat` varchar(255) NOT NULL,
+  `telpon` varchar(20) NOT NULL,
+  `agama` varchar(30) NOT NULL,
+  `foto_profil` text NOT NULL,
+  `email` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `berkas`
+-- Dumping data untuk tabel `alumni`
 --
 
-INSERT INTO `berkas` (`id_berkas`, `nip`, `file`, `date`, `status_pengajuan`) VALUES
-(7, '666', '', '2021-01-01', 'Diterima'),
-(8, '1', '', '2019-11-11', 'Diterima'),
-(9, '1001', '', '2019-11-11', 'Diterima'),
-(11, '1001', 'cv_fauziah.pdf', '2021-08-06', 'Ditolak'),
-(12, '1001', 'cetak.pdf', '2021-08-06', 'Diterima'),
-(13, '123123', '', '2012-12-12', 'Diterima');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `data_riwayat_pelatihan`
---
-
-CREATE TABLE `data_riwayat_pelatihan` (
-  `id_pelatihan` int(10) NOT NULL,
-  `id_kar` varchar(20) NOT NULL,
-  `bidang` varchar(20) NOT NULL,
-  `penyelenggara` varchar(25) NOT NULL,
-  `periode` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `data_riwayat_pelatihan`
---
-
-INSERT INTO `data_riwayat_pelatihan` (`id_pelatihan`, `id_kar`, `bidang`, `penyelenggara`, `periode`) VALUES
-(2, '1202005081', 'jaringan', 'bnsp', '2019'),
-(3, '2199806251', 'Komputer', 'BPNS', '2016'),
-(4, '1199503122', 'Mekanik', 'Balai Tenaga Kerja', '2019'),
-(5, '3199607191', 'Komputer', 'Kursus Kereta Kencana', '2016'),
-(6, '3199607191', 'Public Speaking', 'Seminar Katolik', '2017'),
-(7, '4199609131', 'Menjahit', 'Balai Desa Tatakan', '2015'),
-(8, '4199609131', 'Komputer', 'Balai Tenaga Kerja', '2019');
+INSERT INTO `alumni` (`id_alumni`, `nama_alumni`, `jurusan_smk`, `pendidikan_t`, `tgl_lahir`, `alamat`, `telpon`, `agama`, `foto_profil`, `email`) VALUES
+(5, 'eddy adha saputra', '2', 'as', '2022-01-12', 'Banjar Baru Selatan', '081250653005', 'Islam', 'aku.jpg', 'eddyyucca@gmail.com'),
+(6, 'ahmad amin badawi', '2', 'SMK', '2022-01-12', 'TAPIN', '081266666666', 'Islam', '5f4df47203808.jpg', 'aminbadawi@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -123,49 +93,42 @@ INSERT INTO `developer` (`id_dev`, `username`, `password`, `level`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pendidikan`
+-- Struktur dari tabel `jurusan`
 --
 
-CREATE TABLE `pendidikan` (
-  `id_pen` int(10) NOT NULL,
-  `id_kar` varchar(50) NOT NULL,
-  `tingkat_pendidikan` varchar(50) NOT NULL,
-  `nama_sekolah` varchar(30) NOT NULL,
-  `nama_jurusan` varchar(25) NOT NULL,
-  `kota_pendidikan` varchar(50) NOT NULL,
-  `tahun_pendidikan` varchar(25) NOT NULL
+CREATE TABLE `jurusan` (
+  `id_jurusan` int(11) NOT NULL,
+  `nama_jurusan` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `pendidikan`
+-- Dumping data untuk tabel `jurusan`
 --
 
-INSERT INTO `pendidikan` (`id_pen`, `id_kar`, `tingkat_pendidikan`, `nama_sekolah`, `nama_jurusan`, `kota_pendidikan`, `tahun_pendidikan`) VALUES
-(2, '1202005081', 'TK', 'teka tadika mesra', '', 'tapin', '2018/2019'),
-(3, '1202005081', 'SD', 'SD rantau', '', 'rantau', '2018/2019'),
-(4, '1202005081', 'SMP/MTs', 'MTsN Tapin Selatan', 'Agama', 'Rantau', '2020/2021'),
-(5, '1202005081', 'S1', 'UNISKA', 'TEKNIK INFORMATIKA', 'BANJARBARU', '2022/2022'),
-(6, '1202005081', 'SMA/SMK/MA', 'SMKN 1 TAPIN SELATAN', 'TEKNIK KOMPUTER DAN JARIN', 'TAPIN', '2030/2032'),
-(8, '2199806251', 'TK', 'TK Kencana', '', 'Rantau', '2004'),
-(9, '2199806251', 'SD', 'SDN TATAKAN 1', '', 'Rantau', '2010'),
-(10, '2199806251', 'SMP/MTs', 'MTsN 5 Tapin', '', 'Rantau', '2013'),
-(11, '2199806251', 'SMA/SMK/MA', 'SMAN 1 Tapin', 'IPA', 'Rantau', '2016'),
-(12, '2199806251', 'S1', 'Universitas Lambung Mangkurat', 'Tenik Elektro', 'Banjarbaru', '2019'),
-(13, '1199503122', 'TK', 'TK Tunas Bangsa', '', 'Kotabaru', '2001'),
-(14, '1199503122', 'SD', 'SD Pelita Harapan', '', 'Kotabaru', '2007'),
-(15, '1199503122', 'SMP/MTs', 'SMPN 1 Kotabaru', '', 'Kotabaru', '2010'),
-(16, '1199503122', 'SMA/SMK/MA', 'SMAN 3 Kotabaru', 'IPS', 'Kotabaru', '2013'),
-(17, '1199503122', 'S1', 'Universitas Ahmad Yani', 'Pertambangan', 'Banjarbaru', '2018'),
-(18, '3199607191', 'TK', 'TK Bunda Maria', '', 'Banjarmasin', '2002'),
-(19, '3199607191', 'SD', 'SDN BANJARMASIN 2', '', 'Banjarmasin', '2008'),
-(20, '3199607191', 'SMP/MTs', 'SMPN 2 Banjarmasin', '', 'Banjarmasin', '2011'),
-(21, '3199607191', 'SMA/SMK/MA', 'SMAN 7 Banjarmasin', 'IPA', 'Banjarmasin', '2014'),
-(22, '3199607191', 'S1', 'Universitas Indonesia', 'Pertambangan', 'Jakarta', '2018'),
-(23, '4199609131', 'TK', 'TK Kencana', '', 'Rantau', '2002'),
-(24, '4199609131', 'SD', 'SDN TATAKAN 1', '', 'Rantau', '2008'),
-(25, '4199609131', 'SMP/MTs', 'MTsN 5 Tapin', '', 'Rantau', '2011'),
-(26, '4199609131', 'SMA/SMK/MA', 'SMKN 1 Tapin Selatan', 'Perkebunan', 'Rantau', '2014'),
-(27, '4199609131', 'S1', 'Universitas Lambung Mangkurat', 'Perkebunan', 'Banjarbaru', '2018');
+INSERT INTO `jurusan` (`id_jurusan`, `nama_jurusan`) VALUES
+(2, 'tkr 2');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `lowongan`
+--
+
+CREATE TABLE `lowongan` (
+  `id_lowongan` int(11) NOT NULL,
+  `nama_lowongan` varchar(100) NOT NULL,
+  `isi_lowongan` text NOT NULL,
+  `batas_tanggal` varchar(20) NOT NULL,
+  `nama_perusahaan` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `lowongan`
+--
+
+INSERT INTO `lowongan` (`id_lowongan`, `nama_lowongan`, `isi_lowongan`, `batas_tanggal`, `nama_perusahaan`) VALUES
+(1, 'tes', 'tes', '', ''),
+(2, 'a', 'a', '2022-01-11', 'a');
 
 --
 -- Indexes for dumped tables
@@ -178,10 +141,22 @@ ALTER TABLE `akun`
   ADD PRIMARY KEY (`id_akun`);
 
 --
--- Indeks untuk tabel `berkas`
+-- Indeks untuk tabel `alumni`
 --
-ALTER TABLE `berkas`
-  ADD PRIMARY KEY (`id_berkas`);
+ALTER TABLE `alumni`
+  ADD PRIMARY KEY (`id_alumni`);
+
+--
+-- Indeks untuk tabel `jurusan`
+--
+ALTER TABLE `jurusan`
+  ADD PRIMARY KEY (`id_jurusan`);
+
+--
+-- Indeks untuk tabel `lowongan`
+--
+ALTER TABLE `lowongan`
+  ADD PRIMARY KEY (`id_lowongan`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
@@ -191,13 +166,25 @@ ALTER TABLE `berkas`
 -- AUTO_INCREMENT untuk tabel `akun`
 --
 ALTER TABLE `akun`
-  MODIFY `id_akun` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_akun` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT untuk tabel `berkas`
+-- AUTO_INCREMENT untuk tabel `alumni`
 --
-ALTER TABLE `berkas`
-  MODIFY `id_berkas` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+ALTER TABLE `alumni`
+  MODIFY `id_alumni` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT untuk tabel `jurusan`
+--
+ALTER TABLE `jurusan`
+  MODIFY `id_jurusan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `lowongan`
+--
+ALTER TABLE `lowongan`
+  MODIFY `id_lowongan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

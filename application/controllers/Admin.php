@@ -22,7 +22,7 @@ class Admin extends CI_Controller
     public function index()
     {
         $data['level_akun'] = 'kepala_gs';
-        $data['nama'] = $this->session->userdata('nama_lengkap');
+        $data['nama'] = $this->session->userdata('nama_alumni');
         $data['data'] = false;
         $data['judul'] = 'Dashboard';
 
@@ -54,7 +54,7 @@ class Admin extends CI_Controller
     public function jurusan()
     {
         $data['judul'] = 'Data jurusan';
-        $data['nama'] = $this->session->userdata('nama_lengkap');
+        $data['nama'] = $this->session->userdata('nama_alumni');
         $data['data'] = $this->jurusan_m->get_all_jurusan();
         $this->load->view('template/header', $data);
         $this->load->view('admin/jurusan/data_jurusan', $data);
@@ -63,7 +63,7 @@ class Admin extends CI_Controller
     public function tambah_jurusan()
     {
         $data['judul'] = 'Data jurusan';
-        $data['nama'] = $this->session->userdata('nama_lengkap');
+        $data['nama'] = $this->session->userdata('nama_alumni');
         $this->load->view('template/header', $data);
         $this->load->view('admin/jurusan/input_jurusan', $data);
         $this->load->view('template/footer');
@@ -71,7 +71,7 @@ class Admin extends CI_Controller
     public function edit_jurusan($id_jurusan)
     {
         $data['judul'] = 'Data jurusan';
-        $data['nama'] = $this->session->userdata('nama_lengkap');
+        $data['nama'] = $this->session->userdata('nama_alumni');
         $data['data'] = $this->jurusan_m->get_row_jurusan($id_jurusan);
 
         $this->load->view('template/header', $data);
@@ -85,7 +85,7 @@ class Admin extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $data['data'] = $this->jurusan_m->get_row_jurusan($id_jurusan);
             $data['judul'] = 'Data jurusan';
-            $data['nama'] = $this->session->userdata('nama_lengkap');
+            $data['nama'] = $this->session->userdata('nama_alumni');
             $this->load->view('template/header', $data);
             $this->load->view('admin/jurusan/edit_jurusan', $data);
             $this->load->view('template/footer');
@@ -104,7 +104,7 @@ class Admin extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
 
             $data['judul'] = 'Data jurusan';
-            $data['nama'] = $this->session->userdata('nama_lengkap');
+            $data['nama'] = $this->session->userdata('nama_alumni');
             $this->load->view('template/header', $data);
             $this->load->view('admin/jurusan/input_jurusan', $data);
             $this->load->view('template/footer');
@@ -132,7 +132,7 @@ class Admin extends CI_Controller
     public function buat_lowongan_baru()
     {
         $data['judul'] = 'Data Pegawai';
-        $data['nama'] = $this->session->userdata('nama_lengkap');
+        $data['nama'] = $this->session->userdata('nama_alumni');
         // $data['data'] = $this->pegawai_m->get_all_pegawai();
 
         $this->load->view('template/header', $data);
@@ -148,7 +148,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('isi_lowongan', 'Isi Lowongan');
         if ($this->form_validation->run() == FALSE) {
             $data['judul'] = 'Lowongan Baru';
-            $data['nama'] = $this->session->userdata('nama_lengkap');
+            $data['nama'] = $this->session->userdata('nama_alumni');
             $data['jurusan'] = $this->jurusan_m->get_all_jurusan();
 
             $this->load->view('template/header', $data);
@@ -189,7 +189,7 @@ class Admin extends CI_Controller
     public function view_pegawai($id_pegawai)
     {
         $data['judul'] = 'Data_pegawai';
-        $data['nama'] = $this->session->userdata('nama_lengkap');
+        $data['nama'] = $this->session->userdata('nama_alumni');
         $data['data'] = $this->pegawai_m->get_row_pegawai($id_pegawai);
 
         $this->load->view('template/header', $data);
@@ -201,7 +201,7 @@ class Admin extends CI_Controller
     {
         $this->form_validation->set_rules('nip', 'NIP', 'required');
         $this->form_validation->set_rules('no_ktp', 'No KTP', 'required');
-        $this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required');
+        $this->form_validation->set_rules('nama_alumni', 'Nama Lengkap', 'required');
         $this->form_validation->set_rules('nama_panggilan', 'Nama Panggilan', 'required');
         $this->form_validation->set_rules('jk', 'Jenis Kelamin', 'required');
         $this->form_validation->set_rules('tempat', 'Tempat', 'required');
@@ -217,7 +217,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('jurusan', 'jurusan', 'required');
         if ($this->form_validation->run() == FALSE) {
             $data['judul'] = 'Data Pegawai';
-            $data['nama'] = $this->session->userdata('nama_lengkap');
+            $data['nama'] = $this->session->userdata('nama_alumni');
             $data['jurusan'] = $this->jurusan_m->get_all_jurusan();
             $data['jabatan'] = $this->jabatan_m->get_all_jab();
             $data['x'] = $this->pegawai_m->get_row_pegawai($id_pegawai);
@@ -241,7 +241,7 @@ class Admin extends CI_Controller
             $data = array(
                 'nip' => $this->input->post('nip'),
                 'no_ktp' => $this->input->post('no_ktp'),
-                'nama_lengkap' => $this->input->post('nama_lengkap'),
+                'nama_alumni' => $this->input->post('nama_alumni'),
                 'nama_panggilan' => $this->input->post('nama_panggilan'),
                 'jk' => $this->input->post('jk'),
                 'tempat' => $this->input->post('tempat'),
@@ -293,7 +293,7 @@ class Admin extends CI_Controller
     {
         $data['judul'] = 'Data Lowongan';
         $data['data'] = $this->lowongan_m->get_all_lowongan();
-        $data['nama'] = $this->session->userdata('nama_lengkap');
+        $data['nama'] = $this->session->userdata('nama_alumni');
         $this->load->view('template/header', $data);
         $this->load->view('admin/lowongan/data_lowongan', $data);
         $this->load->view('template/footer');
@@ -302,7 +302,7 @@ class Admin extends CI_Controller
     public function alumni()
     {
         $data['judul'] = 'Data alumni';
-        $data['nama'] = $this->session->userdata('nama_lengkap');
+        $data['nama'] = $this->session->userdata('nama_alumni');
         $data['data'] = $this->alumni_m->get_all_alumni();
 
         $this->load->view('template/header', $data);
@@ -312,7 +312,7 @@ class Admin extends CI_Controller
     public function cetak_alumni()
     {
         $data['judul'] = 'Data alumni';
-        $data['nama'] = $this->session->userdata('nama_lengkap');
+        $data['nama'] = $this->session->userdata('nama_alumni');
         $data['data'] = $this->alumni_m->get_all_alumni();
 
         // $this->load->view('template/header', $data);
@@ -333,7 +333,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('email', 'Email', 'required|is_unique[alumni.email]');
         if ($this->form_validation->run() == FALSE) {
             $data['judul'] = 'Data alumni';
-            $data['nama'] = $this->session->userdata('nama_lengkap');
+            $data['nama'] = $this->session->userdata('nama_alumni');
             $data['jurusan'] = $this->jurusan_m->get_all_jurusan();
 
             $this->load->view('template/header', $data);

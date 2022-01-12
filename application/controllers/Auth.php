@@ -47,15 +47,13 @@ class Auth extends CI_Controller
             if ($cek == true) {
                 foreach ($cek as $row);
                 $this->session->set_userdata('telpon', $row->telpon);
-                $this->session->set_userdata('nama_lengkap', $row->nama_lengkap);
-                $this->session->set_userdata('id_pegawai', $row->id_pegawai);
+                $this->session->set_userdata('nama_alumni', $row->nama_alumni);
+                $this->session->set_userdata('id_alumni', $row->id_alumni);
                 $this->session->set_userdata('level', $row->level);
-                if ($row->level == "user") {
-                    redirect('user');
+                if ($row->level == "admin") {
+                    redirect('admin');
                 } elseif ($row->level == "user") {
-                    $this->session->set_Flashdata('pesan', "<div class='alert alert-danger' role='alert'>Password Salah !
-                    </div>");
-                    redirect("auth/index");
+                    redirect('user');
                 }
             } else {
                 $data['data'] = '<div class="alert alert-danger" role="alert">Password Salah !

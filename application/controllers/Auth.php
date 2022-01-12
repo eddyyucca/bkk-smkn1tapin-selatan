@@ -32,28 +32,26 @@ class Auth extends CI_Controller
 
     public function auth()
     {
-        $this->form_validation->set_rules('email', 'Email Alumni', 'required');
+        $this->form_validation->set_rules('telpon', 'Telpon Alumni', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
         if ($this->form_validation->run() == FALSE) {
             $data['data'] = false;
-
             $data['judul'] = 'Login';
             $this->load->view('auth/template_auth/header', $data);
             $this->load->view('auth/index', $data);
             $this->load->view('auth/template_auth/footer');
         } else {
-
-            $email = $this->input->post('email');
+            $telpon = $this->input->post('telpon');
             $password =  md5($this->input->post('password'));
-            $cek = $this->auth_m->login($email, $password);
+            $cek = $this->auth_m->login($telpon, $password);
             if ($cek == true) {
                 foreach ($cek as $row);
-                $this->session->set_userdata('email', $row->email);
+                $this->session->set_userdata('telpon', $row->telpon);
                 $this->session->set_userdata('nama_lengkap', $row->nama_lengkap);
                 $this->session->set_userdata('id_pegawai', $row->id_pegawai);
                 $this->session->set_userdata('level', $row->level);
-                if ($row->level == "admin") {
-                    redirect('admin');
+                if ($row->level == "user") {
+                    redirect('user');
                 } elseif ($row->level == "user") {
                     $this->session->set_Flashdata('pesan', "<div class='alert alert-danger' role='alert'>Password Salah !
                     </div>");

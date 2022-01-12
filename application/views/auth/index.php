@@ -25,7 +25,7 @@
                                         <form class="user" action="<?= base_url('auth/auth') ?>" method="POST">
                                             <div class="form-group mb-4">
                                                 <div class="form-group mb-4">
-                                                    <input type="email" class="form-control" name="email" placeholder="Email">
+                                                    <input type="number" class="form-control" name="telpon" placeholder="No Telpon">
                                                 </div>
                                             </div>
                                             <div class="form-group mb-4">

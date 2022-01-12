@@ -8,7 +8,7 @@ class User extends CI_Controller
         parent::__construct();
         $this->load->library('form_validation');
         // $this->load->model('jabatan_m');
-        // $this->load->model('atk_model');
+        $this->load->model('alumni_m');
         // $this->load->model('pegawai_m');
         // $this->load->model('pengajuan_m');
         $this->load->library('pagination');
@@ -23,8 +23,8 @@ class User extends CI_Controller
     {
         $data['judul'] = 'Dashboard Pegawai';
         $data['nama'] = $this->session->userdata('nama_lengkap');
-        $id_pegawai =  $this->session->userdata('id_pegawai');
-        // $data['data'] = $this->pegawai_m->get_row_pegawai($id_pegawai);
+        $telpon =  $this->session->userdata('telpon');
+        $data['data'] = $this->alumni_m->get_row_alumni($telpon);
         $data['keranjang'] = $this->cart->contents();
         $this->load->view('template_user/header', $data);
         $this->load->view('user/index', $data);

@@ -46,17 +46,16 @@ class Alumni_m extends CI_Model
     }
     public function get_all_alumni()
     {
-        $this->db->join('akun', 'akun.email = alumni.email');
+        $this->db->join('akun', 'akun.telpon = alumni.telpon');
         $this->db->join('jurusan', 'jurusan.id_jurusan = alumni.jurusan_smk');
         // $this->db->join('bidang', 'bidang.id_bidang = alumni.bidang');
         $this->db->order_by('id_alumni', 'DESC');
         return $this->db->get('alumni')->result();
     }
-    public function get_row_alumni($id_alumni)
+    public function get_row_alumni($telpon)
     {
-        $this->db->where('id_alumni', $id_alumni);
-        $this->db->join('jabatan', 'jabatan.id_jab = alumni.jabatan');
-        $this->db->join('bidang', 'bidang.id_bidang = alumni.bidang');
+        $this->db->where('telpon', $telpon);
+        $this->db->join('jurusan', 'jurusan.id_jurusan = alumni.jurusan_smk');
 
         return $this->db->get('alumni')->row();
     }

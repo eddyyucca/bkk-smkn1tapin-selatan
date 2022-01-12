@@ -9,48 +9,15 @@
             <div class="row">
                 <div class="container-fluid">
                     <?= validation_errors() ?>
-                    <form action="<?= base_url('admin/tambah_pegawai_baru')  ?>" method="POST" enctype="multipart/form-data">
+                    <form action="<?= base_url('admin/tambah_alumni_baru')  ?>" method="POST" enctype="multipart/form-data">
                         <table class="table">
                             <tr>
-                                <td width=20%>NIP Lengkap</td>
-                                <td><input type="text" name="nip" class="form-control" required placeholder="NIP Lengkap"></td>
+                                <td width=20%>Alamat</td>
+                                <td><input type="text" name="nama_alumni" class="form-control" required placeholder="Nama Lengkap"></td>
                             </tr>
                             <tr>
-                                <td width=20%>No KTP</td>
-                                <td><input type="text" name="no_ktp" class="form-control" required placeholder="No KTP"></td>
-                            </tr>
-                            <tr>
-                                <td width=20%>Nama Lengkap</td>
-                                <td><input type="text" name="nama_lengkap" class="form-control" required placeholder="Nama Lengkap"></td>
-                            </tr>
-                            <tr>
-                                <td>Nama Panggilan</td>
-                                <td><input type="text" name="nama_panggilan" class="form-control" required placeholder="Nama panggilan"></td>
-                            </tr>
-                            <tr>
-                                <td>Jenis Kelamin</td>
-                                <td><select class="form-control" name="jk">
-                                        <option value="Laki-Laki">Laki-Laki</option>
-                                        <option value="Perempuan">Perempuan</option>
-                                    </select></td>
-                            </tr>
-                            <tr>
-                                <td>Tempat/Tanggal/Lahir</td>
-                                <td><input type="text" name="tempat" class="form-control" required placeholder="Tempat">
-                                    <input type="date" name="ttl" class="form-control">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Alamat Saat Ini</td>
-                                <td><textarea name="alamat_saat_ini" class="form-control"></textarea></td>
-                            </tr>
-                            <tr>
-                                <td>Alamat Permanen</td>
-                                <td><textarea name="alamat_permanen" class="form-control"></textarea></td>
-                            </tr>
-                            <tr>
-                                <td>Telpon</td>
-                                <td><input type="text" name="no_telp" class="form-control" required placeholder="Telpon"></td>
+                                <td width=20%>Tanggal Lahir</td>
+                                <td><input type="date" name="tgl_lahir" class="form-control" required placeholder="Tanggal Lahir"></td>
                             </tr>
                             <tr>
                                 <td>Agama</td>
@@ -64,32 +31,27 @@
                                     </select></td>
                             </tr>
                             <tr>
-                                <td>Hobi</td>
-                                <td><input type="text" name="hobi" class="form-control" required placeholder="Hobi"></td>
+                                <td width=20%>Pendidikan Terakhir</td>
+                                <td><input type="text" name="pendidikan_t" class="form-control" required placeholder="Pendidikan Terakhir"></td>
+                            </tr>
+                            <tr>
+                                <td width=20%>Alamat</td>
+                                <td><input type="text" name="alamat" class="form-control" required placeholder="Alamat"></td>
                             </tr>
                             <tr>
                                 <td>Email</td>
                                 <td><input type="email" name="email" class="form-control" required placeholder="Email"></td>
                             </tr>
                             <tr>
-                                <td>Mulai Bekerja</td>
-                                <td><input type="date" name="mulai_bekerja" class="form-control" required placeholder="Mulai Bekerja"></td>
+                                <td>Telpon</td>
+                                <td><input type="text" name="telpon" class="form-control" required placeholder="telpon"></td>
                             </tr>
                             <tr>
-                                <td>Bidang</td>
-                                <td><select name="bidang" class="form-control">
+                                <td>Jurusan SMK</td>
+                                <td><select name="jurusan_smk" class="form-control">
                                         <option value="">--PILIH BIDANG--</option>
-                                        <?php foreach ($bidang as $bid) { ?>
-                                            <option value="<?= $bid->id_bidang ?>"><?= $bid->nama_bidang ?></option>
-                                        <?php } ?>
-                                    </select></td>
-                            </tr>
-                            <tr>
-                                <td>Jabatan</td>
-                                <td><select name="jabatan" class="form-control">
-                                        <option value="">--PILIH JABATAN--</option>
-                                        <?php foreach ($jabatan as $jabatan) { ?>
-                                            <option value="<?= $jabatan->id_jab ?>"><?= $jabatan->nama_jab ?></option>
+                                        <?php foreach ($jurusan as $jur) { ?>
+                                            <option value="<?= $jur->id_jurusan ?>"><?= $jur->nama_jurusan ?></option>
                                         <?php } ?>
                                     </select></td>
                             </tr>

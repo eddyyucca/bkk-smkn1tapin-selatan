@@ -122,6 +122,12 @@ class Admin extends CI_Controller
         $this->db->delete('jurusan');
         return redirect('admin/jurusan');
     }
+    public function hapus_lowongan($id_lowongan)
+    {
+        $this->db->where('id_lowongan', $id_lowongan);
+        $this->db->delete('lowongan');
+        return redirect('admin/data_lowongan');
+    }
 
     // jurusan end
     // -------------------- //

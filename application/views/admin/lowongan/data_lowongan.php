@@ -30,6 +30,7 @@
                                 <td align="center">
                                     <a href="<?= base_url('admin/pengajuan_diterima/' . $x->id_lowongan) ?>" class="btn btn-success">Ubah</a>
                                     <a href="<?= base_url('admin/pengajuan_ditolak/' . $x->id_lowongan) ?>" class="btn btn-primary">Lihat Pelamar</a>
+                                    <a href="<?= base_url('admin/hapus_lowongan/' . $x->id_lowongan) ?>" class="btn btn-danger">Hapus Lowongan</a>
                                 </td>
                             </tr>
                         <?php } ?>

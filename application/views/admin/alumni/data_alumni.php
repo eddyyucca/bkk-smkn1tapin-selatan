@@ -30,7 +30,7 @@
                                 <td><?= $nomor++; ?></td>
                                 <td><?= $x->nama_alumni; ?></td>
                                 <td><?= $x->email; ?></td>
-                                <td><?= $x->jurusan_smk; ?></td>
+                                <td><?= $x->nama_jurusan; ?></td>
                                 <td><?= $x->pendidikan_t; ?></td>
                                 <td align="center">
                                     <a href="<?= base_url('admin/delete_alumni/') . $x->telpon; ?>" onclick="return confirm('Yakin Hapus?')" class="btn btn-danger">Hapus</a>

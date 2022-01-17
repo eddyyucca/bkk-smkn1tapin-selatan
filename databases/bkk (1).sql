@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 12 Jan 2022 pada 09.11
+-- Waktu pembuatan: 17 Jan 2022 pada 20.20
 -- Versi server: 10.4.20-MariaDB
 -- Versi PHP: 7.3.29
 
@@ -73,26 +73,6 @@ INSERT INTO `alumni` (`id_alumni`, `nama_alumni`, `jurusan_smk`, `pendidikan_t`,
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `developer`
---
-
-CREATE TABLE `developer` (
-  `id_dev` int(10) NOT NULL,
-  `username` varchar(20) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `level` enum('super_admin','','','') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `developer`
---
-
-INSERT INTO `developer` (`id_dev`, `username`, `password`, `level`) VALUES
-(1, 'admin', 'd56b699830e77ba53855679cb1d252da', 'super_admin');
-
--- --------------------------------------------------------
-
---
 -- Struktur dari tabel `jurusan`
 --
 
@@ -107,6 +87,26 @@ CREATE TABLE `jurusan` (
 
 INSERT INTO `jurusan` (`id_jurusan`, `nama_jurusan`) VALUES
 (2, 'tkr 2');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `lamaran`
+--
+
+CREATE TABLE `lamaran` (
+  `id_lamaran` int(11) NOT NULL,
+  `id_lowongan` varchar(30) NOT NULL,
+  `id_alumni` varchar(30) NOT NULL,
+  `status_lamaran` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `lamaran`
+--
+
+INSERT INTO `lamaran` (`id_lamaran`, `id_lowongan`, `id_alumni`, `status_lamaran`) VALUES
+(1, '4', '5', '1');
 
 -- --------------------------------------------------------
 
@@ -127,8 +127,7 @@ CREATE TABLE `lowongan` (
 --
 
 INSERT INTO `lowongan` (`id_lowongan`, `nama_lowongan`, `isi_lowongan`, `batas_tanggal`, `nama_perusahaan`) VALUES
-(1, 'tes', 'tes', '', ''),
-(2, 'a', 'a', '2022-01-11', 'a');
+(4, 'sasa', 'sa', '2022-01-18', 'a');
 
 --
 -- Indexes for dumped tables
@@ -151,6 +150,12 @@ ALTER TABLE `alumni`
 --
 ALTER TABLE `jurusan`
   ADD PRIMARY KEY (`id_jurusan`);
+
+--
+-- Indeks untuk tabel `lamaran`
+--
+ALTER TABLE `lamaran`
+  ADD PRIMARY KEY (`id_lamaran`);
 
 --
 -- Indeks untuk tabel `lowongan`
@@ -181,10 +186,16 @@ ALTER TABLE `jurusan`
   MODIFY `id_jurusan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT untuk tabel `lamaran`
+--
+ALTER TABLE `lamaran`
+  MODIFY `id_lamaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT untuk tabel `lowongan`
 --
 ALTER TABLE `lowongan`
-  MODIFY `id_lowongan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_lowongan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

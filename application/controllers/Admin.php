@@ -145,6 +145,16 @@ class Admin extends CI_Controller
         $this->load->view('admin/lowongan/input_lowongan', $data);
         $this->load->view('template/footer');
     }
+    public function edit_lowongan($id_lowongan)
+    {
+        $data['judul'] = 'Data Pegawai';
+        $data['nama'] = $this->session->userdata('nama_alumni');
+        $data['data'] = $this->lowongan_m->get_row_lowongan($id_lowongan);
+
+        $this->load->view('template/header', $data);
+        $this->load->view('admin/lowongan/edit_lowongan', $data);
+        $this->load->view('template/footer');
+    }
 
     public function proses_input_lowongan()
     {
@@ -172,6 +182,33 @@ class Admin extends CI_Controller
             return redirect('admin/data_lowongan');
         }
     }
+    public function proses_update_lowongan($id_lowongan)
+    {
+        $this->form_validation->set_rules('nama_lowongan', 'Nama Lowongan', 'required');
+        $this->form_validation->set_rules('nama_perusahaan', 'Nama Perusahaan');
+        $this->form_validation->set_rules('batas_tanggal', 'Batas Tanggal');
+        $this->form_validation->set_rules('isi_lowongan', 'Isi Lowongan');
+        if ($this->form_validation->run() == FALSE) {
+            $data['judul'] = 'Lowongan Baru';
+            $data['nama'] = $this->session->userdata('nama_alumni');
+            $data['jurusan'] = $this->jurusan_m->get_all_jurusan();
+
+            $this->load->view('template/header', $data);
+            $this->load->view('admin/lowongan/input_lowongan', $data);
+            $this->load->view('template/footer');
+        } else {
+            $data = array(
+                'nama_lowongan' => $this->input->post('nama_lowongan'),
+                'nama_perusahaan' => $this->input->post('nama_perusahaan'),
+                'batas_tanggal' => $this->input->post('batas_tanggal'),
+                'isi_lowongan' => $this->input->post('isi_lowongan'),
+            );
+            $this->db->where('id_lowongan', $id_lowongan);
+
+            $this->db->update('lowongan', $data);
+            return redirect('admin/data_lowongan');
+        }
+    }
 
     public function jadikan_admin($nip)
     {
@@ -192,14 +229,14 @@ class Admin extends CI_Controller
         return redirect('admin/pegawai');
     }
 
-    public function view_pegawai($id_pegawai)
+    public function lihat_lowongan($id_lowongan)
     {
-        $data['judul'] = 'Data_pegawai';
+        $data['judul'] = 'Data Lowongan';
         $data['nama'] = $this->session->userdata('nama_alumni');
-        $data['data'] = $this->pegawai_m->get_row_pegawai($id_pegawai);
+        $data['data'] = $this->lowongan_m->get_row_lowongan($id_lowongan);
 
         $this->load->view('template/header', $data);
-        $this->load->view('admin/pegawai/view_pegawai', $data);
+        $this->load->view('user/lowongan/lihat_lowongan', $data);
         $this->load->view('template/footer');
     }
 

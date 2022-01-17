@@ -10,10 +10,10 @@
             <div class="row">
                 <div class="container-fluid">
                     <?= validation_errors() ?>
-                    <form action="<?= base_url('admin/proses_input_lowongan')  ?>" method="POST">
+                    <form action="<?= base_url('admin/proses_update_lowongan/' . $data->id_lowongan)  ?>" method="POST">
                         <div class="form-group">
                             <label for="inputItem">Nama Lowongan</label>
-                            <input type="text" class="form-control" id="nama_lowongan" name="nama_lowongan" placeholder="Nama Lowongan" value="<?= $data->nama_lowongan ?>">
+                            <input type="text" class="form-control" id="nama_lowongan" name="nama_lowongan" value="<?= $data->nama_lowongan ?>" placeholder="Nama Lowongan">
                         </div>
                         <div class="form-group">
                             <label for="inputItem">Perusahaan/Instansi</label>
@@ -26,7 +26,7 @@
 
                         <div class="form-group">
                             <label for="inputItem">Isi Lowongan</label>
-                            <textarea class="form-control" name="isi_lowongan" rows="5"> <?= $data->batas_tanggal ?>" </textarea>
+                            <textarea class="form-control" name="isi_lowongan" rows="5"><?= $data->isi_lowongan ?> </textarea>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Simpan</button>

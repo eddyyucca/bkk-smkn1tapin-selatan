@@ -82,16 +82,16 @@ class User extends CI_Controller
         $this->load->view('user/pengajuan/pengajuan_gaji', $data);
         $this->load->view('template_user/footer');
     }
-    public function history_pengajuan()
+    public function status_pengajuan()
     {
         $data['keranjang'] = $this->cart->contents();
-        $data['judul'] = 'Upload SK Terakhir';
+        $data['judul'] = 'Pengajuan Lamaran';
         $data['nama'] = $this->session->userdata('nama_alumni');
-        $nip =  $this->session->userdata('nip');
-        $data['data'] = $this->pegawai_m->get_all_pengajuan($nip);
+        $id_alumni = $this->session->userdata('id_alumni');
+        $data['data'] = $this->alumni_m->get_status($id_alumni);
         $data['pesan'] = false;
         $this->load->view('template_user/header', $data);
-        $this->load->view('user/pengajuan/history_pengajuan', $data);
+        $this->load->view('user/lowongan/status_lamaran', $data);
         $this->load->view('template_user/footer');
     }
 
@@ -132,15 +132,30 @@ class User extends CI_Controller
         $this->load->view('template_user/footer');
     }
 
-    public function ubah_pengajuan($id_pegawai)
+    public function kirim_lamaran($id_lowongan)
     {
-        $data['judul'] = 'Data Pegawai';
-        $data['data'] = $this->pegawai_m->get_all_pegawai();
-        $data['keranjang'] = $this->cart->contents();
-        $data['nama'] = $this->session->userdata('nama_alumni');
-        $this->load->view('template/header', $data);
-        $this->load->view('admin/pegawai/pegawai_baru', $data);
-        $this->load->view('template/footer');
+        $id_alumni = $this->session->userdata('id_alumni');
+        $cek = $this->alumni_m->cek($id_lowongan, $id_alumni);
+        if ($cek == true) {
+            $data['notif'] = true;
+            $data['judul'] = 'Data Lowongan';
+            $data['data'] = $this->lowongan_m->get_all_lowongan();
+            $data['nama'] = $this->session->userdata('nama_alumni');
+
+            $this->load->view('template_user/header', $data);
+            $this->load->view('user/lowongan/index', $data);
+            $this->load->view('template_user/footer');
+        } else {
+
+            $data = array(
+                'id_lowongan' => $id_lowongan,
+                'id_alumni' => $this->session->userdata('id_alumni'),
+                'status_lamaran' => $this->input->post('status'),
+            );
+
+            $this->db->insert('lamaran', $data);
+            redirect('user/data_lowongan');
+        }
     }
     // pengajuan end
     // -------------------- //
@@ -155,7 +170,7 @@ class User extends CI_Controller
         $telpon =  $this->session->userdata('telpon');
         $data['data'] = $this->alumni_m->get_row_alumni($telpon);
         $data['pesan'] = false;
-        $data['keranjang'] = $this->cart->contents();
+
         $this->load->view('template_user/header', $data);
         $this->load->view('user/password/ubah_password', $data);
         $this->load->view('template_user/footer');
@@ -375,6 +390,7 @@ class User extends CI_Controller
         $data['judul'] = 'Data Lowongan';
         $data['data'] = $this->lowongan_m->get_all_lowongan();
         $data['nama'] = $this->session->userdata('nama_alumni');
+        $data['notif'] = false;
         $this->load->view('template_user/header', $data);
         $this->load->view('user/lowongan/index', $data);
         $this->load->view('template_user/footer');

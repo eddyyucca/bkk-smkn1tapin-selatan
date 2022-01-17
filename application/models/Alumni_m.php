@@ -12,14 +12,11 @@ class Alumni_m extends CI_Model
             return 0;
         }
     }
-    public function jumlah_absen()
+    public function cek($id_lowongan, $id_alumni)
     {
-        $query = $this->db->get('absen');
-        if ($query->num_rows() > 0) {
-            return $query->num_rows();
-        } else {
-            return 0;
-        }
+        $this->db->where('id_lowongan', $id_lowongan);
+        $this->db->where('id_alumni', $id_alumni);
+        return $this->db->get('lamaran')->row();
     }
 
     public function jumlah_absen_bulan($bulan)
@@ -50,6 +47,16 @@ class Alumni_m extends CI_Model
         $this->db->join('jurusan', 'jurusan.id_jurusan = alumni.jurusan_smk');
         // $this->db->join('bidang', 'bidang.id_bidang = alumni.bidang');
         $this->db->order_by('id_alumni', 'DESC');
+        return $this->db->get('alumni')->result();
+    }
+    public function get_status($id_alumni)
+    {
+        $this->db->join('lamaran', 'lamaran.id_lowongan = lamaran.id_lowongan');
+        $this->db->join('lowongan', 'lowongan.id_lowongan = lamaran.id_lowongan');
+        $this->db->join('akun', 'akun.telpon = alumni.telpon');
+        $this->db->join('jurusan', 'jurusan.id_jurusan = alumni.jurusan_smk');
+        $this->db->where('alumni.id_alumni', $id_alumni);
+        $this->db->order_by('lowongan.id_lowongan', 'DESC');
         return $this->db->get('alumni')->result();
     }
     public function get_row_alumni($telpon)

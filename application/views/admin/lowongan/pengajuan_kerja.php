@@ -26,7 +26,7 @@
                                 <td><?= $x->nama_perusahaan; ?></td>
                                 <td><?= $x->nama_alumni; ?></td>
                                 <td align="center">
-                                    <a href="<?= base_url('admin/pengajuan_ditolak/' . $x->id_lowongan) ?>" class="btn btn-primary">Lihat Pelamar</a>
+                                    <a href="<?= base_url('admin/cek_pelamar/' . $x->id_alumni) ?>" class="btn btn-primary">Lihat Pelamar</a>
                                 </td>
                             </tr>
                         <?php } ?>

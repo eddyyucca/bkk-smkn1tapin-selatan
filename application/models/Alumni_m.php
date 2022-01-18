@@ -12,6 +12,17 @@ class Alumni_m extends CI_Model
             return 0;
         }
     }
+    public function jumlah_lowongan()
+    {
+        $date = ('Y-m-d');
+        $this->db->where('batas_tanggal >=', $date);
+        $query = $this->db->get('lowongan');
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        } else {
+            return 0;
+        }
+    }
     public function cek($id_lowongan, $id_alumni)
     {
         $this->db->where('id_lowongan', $id_lowongan);
@@ -56,6 +67,16 @@ class Alumni_m extends CI_Model
         $this->db->join('akun', 'akun.telpon = alumni.telpon');
         $this->db->join('jurusan', 'jurusan.id_jurusan = alumni.jurusan_smk');
         $this->db->where('alumni.id_alumni', $id_alumni);
+        $this->db->order_by('lowongan.id_lowongan', 'DESC');
+        return $this->db->get('alumni')->result();
+    }
+    public function get_pengajuan()
+    {
+        $this->db->join('lamaran', 'lamaran.id_lowongan = lamaran.id_lowongan');
+        $this->db->join('lowongan', 'lowongan.id_lowongan = lamaran.id_lowongan');
+        $this->db->join('akun', 'akun.telpon = alumni.telpon');
+        $this->db->join('jurusan', 'jurusan.id_jurusan = alumni.jurusan_smk');
+        $this->db->where('lamaran.status_lamaran', "1");
         $this->db->order_by('lowongan.id_lowongan', 'DESC');
         return $this->db->get('alumni')->result();
     }

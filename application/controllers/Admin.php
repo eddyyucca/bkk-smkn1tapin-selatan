@@ -21,11 +21,11 @@ class Admin extends CI_Controller
 
     public function index()
     {
-        $data['level_akun'] = 'kepala_gs';
         $data['nama'] = $this->session->userdata('nama_alumni');
         $data['data'] = false;
         $data['judul'] = 'Dashboard';
-
+        $data['jumlah_alumni'] = $this->alumni_m->jumlah_alumni();
+        $data['jumlah_lowongan'] = $this->alumni_m->jumlah_lowongan();
         // $data['jml_alumni'] = $this->pegawai_m->jumlah_pegawai();
         // $data['jml_jurusan'] = $this->pegawai_m->jumlah_jurusan();
         // $data['jml_absen'] = $this->pegawai_m->jumlah_absen();
@@ -339,6 +339,15 @@ class Admin extends CI_Controller
         $data['nama'] = $this->session->userdata('nama_alumni');
         $this->load->view('template/header', $data);
         $this->load->view('admin/lowongan/data_lowongan', $data);
+        $this->load->view('template/footer');
+    }
+    public function pengajuan_kerja()
+    {
+        $data['judul'] = 'Data Lowongan';
+        $data['data'] = $this->alumni_m->get_pengajuan();
+        $data['nama'] = $this->session->userdata('nama_alumni');
+        $this->load->view('template/header', $data);
+        $this->load->view('admin/lowongan/pengajuan_kerja', $data);
         $this->load->view('template/footer');
     }
 

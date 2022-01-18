@@ -20,7 +20,7 @@
                                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Jumlah Pencari Kerja</div>
                                     </div>
                                     <div class="col-auto">
-                                        11
+                                        <?= $jumlah_alumni ?>
                                     </div>
                                 </div>
                             </div>
@@ -34,7 +34,7 @@
                                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Jumlah Lowongan Aktif</div>
                                     </div>
                                     <div class="col-auto">
-                                        12
+                                        <?= $jumlah_lowongan ?>
                                     </div>
                                 </div>
                             </div>

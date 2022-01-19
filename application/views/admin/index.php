@@ -31,10 +31,12 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Jumlah Lowongan Aktif</div>
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Jumlah Lowongan</div>
                                     </div>
                                     <div class="col-auto">
-                                        <?= $jumlah_lowongan ?>
+                                        <?=
+                                        $no = $jumlah_lowongan; ?>
+
                                     </div>
                                 </div>
                             </div>

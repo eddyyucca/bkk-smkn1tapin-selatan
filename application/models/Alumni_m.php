@@ -14,8 +14,7 @@ class Alumni_m extends CI_Model
     }
     public function jumlah_lowongan()
     {
-        $date = ('Y-m-d');
-        $this->db->where('batas_tanggal >=', $date);
+
         $query = $this->db->get('lowongan');
         if ($query->num_rows() > 0) {
             return $query->num_rows();

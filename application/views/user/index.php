@@ -61,11 +61,26 @@
                             </tr>
                         </table>
                         <hr>
-                        <a class="btn btn-primary mb-1" href="">Tentang Saya</a>
-                        <a class="btn btn-primary mb-1" href="">Curriculum Vitae</a>
-                        <a class="btn btn-primary mb-1" href="">Ijazah Terakhir & Lainnya</a>
-                        <a class="btn btn-primary mb-1" href="">SKCK</a>
-                        <a class="btn btn-primary mb-1" href="">Sertifikat Keahlian</a>
+                        <!-- tentang saya -->
+
+                        <tr>
+                            <td> <a class="btn btn-primary mb-1" href="<?= base_url('user/isi_tentang_saya') ?>">Isi Tentang Saya</a>
+                                <br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tentang Saya</td>
+                            <td>: <?= $data->tentang_saya ?> </td>
+                        </tr>
+                        <br>
+
+                        <!-- cv -->
+                        <?php if ($data->data_pdf == false) { ?>
+                            <br>
+                            <a class="btn btn-primary mb-1" href="<?= base_url('user/upload_cv') ?>">Upload Data PDF Berisi CV,SKCK,Ijazah Terakhir & Sertifikat Keahlian Lengkap</a>
+                        <?php } else { ?>
+                            <a class="btn btn-primary mb-1" href="<?= base_url('user/data_pdf') ?>">Data PDF Lengkap</a>
+                        <?php  } ?>
                     </div>
                 </div>
             </div>

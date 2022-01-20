@@ -25,7 +25,6 @@ class User extends CI_Controller
         $data['nama'] = $this->session->userdata('nama_alumni');
         $telpon =  $this->session->userdata('telpon');
         $data['data'] = $this->alumni_m->get_row_alumni($telpon);
-        $data['keranjang'] = $this->cart->contents();
         $this->load->view('template_user/header', $data);
         $this->load->view('user/index', $data);
         $this->load->view('template_user/footer');
@@ -173,6 +172,19 @@ class User extends CI_Controller
 
         $this->load->view('template_user/header', $data);
         $this->load->view('user/password/ubah_password', $data);
+        $this->load->view('template_user/footer');
+    }
+    public function isi_tentang_saya()
+    {
+
+        $data['judul'] = 'Ubah Password Pegawai';
+        $data['nama'] = $this->session->userdata('nama_alumni');
+        $telpon =  $this->session->userdata('telpon');
+        $data['data'] = $this->alumni_m->get_row_alumni($telpon);
+        $data['pesan'] = false;
+
+        $this->load->view('template_user/header', $data);
+        $this->load->view('user/tentang_saya', $data);
         $this->load->view('template_user/footer');
     }
 

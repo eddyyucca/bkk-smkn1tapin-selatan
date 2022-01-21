@@ -88,6 +88,25 @@ class Admin extends CI_Controller
         $this->load->view('admin/alumni/edit_alumni', $data);
         $this->load->view('template/footer');
     }
+    public function kode_lowongan($id_lowongan)
+    {
+        $data['judul'] = 'Data jurusan';
+        $data['nama'] = $this->session->userdata('nama_alumni');
+        $data['data'] = $this->lowongan_m->get_row_lowongan($id_lowongan);
+
+        $this->load->view('template/header', $data);
+        $this->load->view('admin/lowongan/kode', $data);
+        $this->load->view('template/footer');
+    }
+    public function update_kode($id_lowongan)
+    {
+        $data = array(
+            "kode" =>                $this->input->post('kode')
+        );
+        $this->db->where('id_lowongan', $id_lowongan);
+        $this->db->update('lowongan', $data);
+        return redirect('admin/data_lowongan');
+    }
 
     public function proses_update_jurusan($id_jurusan)
     {

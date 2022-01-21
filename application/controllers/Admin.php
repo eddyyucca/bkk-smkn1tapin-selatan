@@ -78,6 +78,16 @@ class Admin extends CI_Controller
         $this->load->view('admin/jurusan/edit_jurusan', $data);
         $this->load->view('template/footer');
     }
+    public function edit_alumni($telpon)
+    {
+        $data['judul'] = 'Data jurusan';
+        $data['nama'] = $this->session->userdata('nama_alumni');
+        $data['data'] = $this->alumni_m->get_row_alumni($telpon);
+
+        $this->load->view('template/header', $data);
+        $this->load->view('admin/alumni/edit_alumni', $data);
+        $this->load->view('template/footer');
+    }
 
     public function proses_update_jurusan($id_jurusan)
     {
@@ -427,6 +437,16 @@ class Admin extends CI_Controller
             $this->db->insert('akun', $akun);
             return redirect('admin/alumni');
         }
+    }
+
+    public function view_alumni($telpon)
+    {
+        $data['judul'] = 'Dashboard Alumni';
+        $data['nama'] = $this->session->userdata('nama_alumni');
+        $data['data'] = $this->alumni_m->get_row_alumni($telpon);
+        $this->load->view('template/header', $data);
+        $this->load->view('admin/alumni/view_alumni', $data);
+        $this->load->view('template/footer', $data);
     }
 }
 

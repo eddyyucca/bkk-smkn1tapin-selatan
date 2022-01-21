@@ -34,8 +34,8 @@
                                 <td><?= $x->pendidikan_t; ?></td>
                                 <td align="center">
                                     <a href="<?= base_url('admin/delete_alumni/') . $x->telpon; ?>" onclick="return confirm('Yakin Hapus?')" class="btn btn-danger">Hapus</a>
-                                    <a href="<?= base_url('admin/update_pegawai/') . $x->id_alumni; ?>" class="btn btn-primary">Edit</a>
-                                    <a href="<?= base_url('admin/view_pegawai/') . $x->id_alumni; ?>" class="btn btn-primary">View</a>
+                                    <a href="<?= base_url('admin/edit_alumni/') . $x->telpon; ?>" class="btn btn-primary">Edit</a>
+                                    <a href="<?= base_url('admin/view_alumni/') . $x->telpon; ?>" class="btn btn-primary">View</a>
                                 </td>
                             </tr>
                         <?php } ?>

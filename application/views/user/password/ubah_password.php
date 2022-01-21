@@ -7,7 +7,7 @@
         <div class="card-body">
             <div class="table-responsive">
                 <div class="container">
-                    <form action="<?= base_url('user/proses_ubah_password/') . $data->telpon ?>" method="POST">
+                    <form action="<?= base_url('user/proses_ubah_password/') ?>" method="POST">
                         <table class="table">
                             <?= $pesan; ?>
                             <?php if (validation_errors() == false) {

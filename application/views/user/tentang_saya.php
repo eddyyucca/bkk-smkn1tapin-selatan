@@ -7,12 +7,15 @@
         <div class="card-body">
             <div class="table-responsive">
                 <div class="container">
-                    <form action="<?= base_url('user/proses_ubah_password/') . $data->telpon ?>" method="POST">
+                    <form action="<?= base_url('user/simpan_tentang_saya') ?>" method="POST">
                         <table class="table">
 
                             <tr>
                                 <td width=20%>Tentang Saya</td>
-                                <textarea name="tentang_saya" cols="30" rows="10"></textarea>
+                                <td>
+                                    <textarea name="tentang_saya" class="form-control"></textarea>
+                                </td>
+
                             </tr>
 
                             <td>

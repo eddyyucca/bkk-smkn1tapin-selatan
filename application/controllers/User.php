@@ -30,16 +30,7 @@ class User extends CI_Controller
         $this->load->view('template_user/footer');
     }
 
-    public function data_pegawai()
-    {
-        $data['judul'] = 'Dashboard Pegawai';
-        $data['data'] = $this->pegawai_m->get_all_pegawai();
-        $data['keranjang'] = $this->cart->contents();
-        $data['nama'] = $this->session->userdata('nama_alumni');
-        $this->load->view('template/header', $data);
-        $this->load->view('user/index', $data);
-        $this->load->view('template/footer');
-    }
+
 
 
     // pengajuan gaji
@@ -94,10 +85,10 @@ class User extends CI_Controller
         $this->load->view('template_user/footer');
     }
 
-    public function pengajuan_baru($nip)
+    public function upload_pdf()
     {
-        $config['upload_path']   = './assets/file_pengajuan/';
-        $config['allowed_types'] = 'gif|jpg|png|jpeg|pdf';
+        $config['upload_path']   = './assets/file/';
+        $config['allowed_types'] = 'pdf';
         //$config['max_size']      = 100; 
         //$config['max_width']     = 1024; 
         //$config['max_height']    = 768;  
@@ -106,29 +97,13 @@ class User extends CI_Controller
         // script upload file 1
         $this->upload->do_upload('file');
         $x = $this->upload->data();
-        $id_pegawai =  $this->session->userdata('id_pegawai');
-        // $data_model = $this->pegawai_m->get_row_pegawai($id_pegawai);
-
+        $telpon =  $this->session->userdata('telpon');
         $data = array(
-            'nip' => $nip,
-            'file' => $x["file_name"],
-            'date' => date('Y-m-d'),
-            'status_pengajuan' => "Diperiksa"
+            'data_pdf' => $x["file_name"],
         );
-        $this->db->insert('berkas', $data);
-        $data['judul'] = 'Upload SK Terakhir';
-        $data['nama'] = $this->session->userdata('nama_alumni');
-        $id_pegawai =  $this->session->userdata('id_pegawai');
-        $data['data'] = $this->pegawai_m->get_row_pegawai($id_pegawai);
-        $nip =  $this->session->userdata('nip');
-        $data['waktu'] = $this->pengajuan_m->cek_pengajuan($nip);
-        $data['pesan'] = false;
-        $data['pesan'] = '<div class="alert alert-success" role="alert">Berkas Berhasil Di Upload !
-            </div>';
-        $data['keranjang'] = $this->cart->contents();
-        $this->load->view('template_user/header', $data);
-        $this->load->view('user/pengajuan/pengajuan_gaji', $data);
-        $this->load->view('template_user/footer');
+        $this->db->where('telpon', $telpon);
+        $this->db->update('alumni', $data);
+        redirect('user');
     }
 
     public function kirim_lamaran($id_lowongan)
@@ -187,44 +162,37 @@ class User extends CI_Controller
         $this->load->view('user/tentang_saya', $data);
         $this->load->view('template_user/footer');
     }
-
-    public function proses_ubah_password($nip)
+    public function proses_ubah_password()
     {
-        $password = password_hash($this->input->post['password_lama'], PASSWORD_BCRYPT);
-        // $_POST['password'] = password_hash($_POST['password'], PASSWORD_BCRYPT);
-        var_dump($password);
-        // $cek = $this->pegawai_m->cek_pass($password, $nip);
+        $telpon =  $this->session->userdata('telpon');
+        $password = md5($this->input->post('password_lama'));
+        $cek = $this->alumni_m->cek_pass($password, $telpon);
 
-        //     if ($cek == true) {
-        //         $data['judul'] = 'Ubah Password Pegawai';
-        //         $data['keranjang'] = $this->cart->contents();
-        //         $data['nama'] = $this->session->userdata('nama_alumni');
-        //         $id_pegawai =  $this->session->userdata('id_pegawai');
-        //         $data['data'] = $this->pegawai_m->get_row_pegawai($id_pegawai);
-        //         $data['pesan'] = '<div class="alert alert-success" role="alert">Password Berhasil Diubah !
-        // </div>';
-        //         $data_update = array(
-        //             "password" => md5($this->input->post('password_baru'))
-        //         );
-        //         $this->db->where('nip', $nip);
-        //         $this->db->update('akun', $data_update);
-        //         $data['keranjang'] = $this->cart->contents();
-        //         $this->load->view('template_user/header', $data);
-        //         $this->load->view('user/password/ubah_password', $data);
-        //         $this->load->view('template_user/footer');
-        //     } else {
-        //         $data['judul'] = 'Ubah Password Pegawai';
-        //         $data['nama'] = $this->session->userdata('nama_alumni');
-        //         $data['keranjang'] = $this->cart->contents();
-        //         $id_pegawai =  $this->session->userdata('id_pegawai');
-        //         $data['data'] = $this->pegawai_m->get_row_pegawai($id_pegawai);
-        //         $data['pesan'] = '<div class="alert alert-danger" role="alert">Password Salah !
-        // </div>';
+        if ($cek == true) {
+            $data['judul'] = 'Ubah Password Pegawai';
+            $data['nama'] = $this->session->userdata('nama_alumni');
+            $data['pesan'] = '<div class="alert alert-success" role="alert">Password Berhasil Diubah !
+    </div>';
+            $data_update = array(
+                "password" => md5($this->input->post('password_baru'))
+            );
+            $this->db->where('telpon', $telpon);
+            $this->db->update('akun', $data_update);
+            $this->load->view('template_user/header', $data);
+            $this->load->view('user/password/ubah_password', $data);
+            $this->load->view('template_user/footer');
+        } else {
+            $data['judul'] = 'Ubah Password Pegawai';
+            $data['nama'] = $this->session->userdata('nama_alumni');
+            $data['keranjang'] = $this->cart->contents();
 
-        //         $this->load->view('template_user/header', $data);
-        //         $this->load->view('user/password/ubah_password', $data);
-        //         $this->load->view('template_user/footer');
-        // }
+            $data['pesan'] = '<div class="alert alert-danger" role="alert">Password Salah !
+    </div>';
+
+            $this->load->view('template_user/header', $data);
+            $this->load->view('user/password/ubah_password', $data);
+            $this->load->view('template_user/footer');
+        }
     }
     // end password
 
@@ -356,34 +324,16 @@ class User extends CI_Controller
         redirect('user/keranjang');
     }
 
-    public function insert()
-    {
-        $x = $this->db->get('data_order')->result();
-        $id_x = count($x) + 1;
-        $cart = $this->cart->contents();
-        foreach ($cart as $item) {
-            $data = array(
-                'id_order' => '',
-                'id_keranjang' => $id_x,
-                'id_barang' => $item['id'],
-                'qty_order' => $item['qty'],
-                'id_bidang' => $item['bidang'],
-                'user_id' => $item['name'],
-                'tanggal' => $item['tanggal']
-            );
-            $this->atk_model->insert($data);
-        }
 
-        $keranjang = array(
-            'id_peg' => $id_x,
-            'id_bidang' => $item['bidang'],
-            'user' => $item['name'],
-            'status' => '3',
-            'tanggal' => $item['tanggal']
+    public function simpan_tentang_saya()
+    {
+        $telpon = $this->session->userdata('telpon');
+        $data = array(
+            'tentang_saya' =>  $this->input->post('tentang_saya'),
         );
-        $this->atk_model->insert_result($keranjang);
-        $this->cart->destroy();
-        redirect('user/atk/atk');
+        $this->db->where('telpon', $telpon);
+        $this->db->update('alumni', $data);
+        redirect('user');
     }
 
     public function status()

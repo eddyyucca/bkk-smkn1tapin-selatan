@@ -115,9 +115,9 @@ class Alumni_m extends CI_Model
         return $this->db->get('berkas')->result();
     }
 
-    public function cek_pass($password, $nip)
+    public function cek_pass($password, $telpon)
     {
-        $this->db->where('nip', $nip);
+        $this->db->where('telpon', $telpon);
         $this->db->where('password', $password);
         $this->db->limit(1);
         $query = $this->db->get('akun');

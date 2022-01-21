@@ -75,12 +75,17 @@
                         <br>
 
                         <!-- cv -->
-                        <?php if ($data->data_pdf == false) { ?>
+
+                        <br>
+                        <hr>
+                        <form action="<?= base_url('user/upload_pdf') ?>" method="POST" enctype="multipart/form-data">
+                            <input type="file" name="file" class="form-control" placeholder="File PDF" required>
                             <br>
-                            <a class="btn btn-primary mb-1" href="<?= base_url('user/upload_cv') ?>">Upload Data PDF Berisi CV,SKCK,Ijazah Terakhir & Sertifikat Keahlian Lengkap</a>
-                        <?php } else { ?>
-                            <a class="btn btn-primary mb-1" href="<?= base_url('user/data_pdf') ?>">Data PDF Lengkap</a>
-                        <?php  } ?>
+                            <button class="btn btn-primary mb-1">Upload Data PDF Berisi CV,SKCK,Ijazah Terakhir & Sertifikat Keahlian Lengkap</button>
+                        </form>
+
+                        <a class="btn btn-primary mb-1" href="<?= base_url('./assets/file/' . $data->data_pdf) ?>">Data PDF Lengkap</a>
+
                     </div>
                 </div>
             </div>

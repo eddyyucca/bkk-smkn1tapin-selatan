@@ -467,6 +467,26 @@ class Admin extends CI_Controller
         $this->load->view('admin/alumni/view_alumni', $data);
         $this->load->view('template/footer', $data);
     }
+
+    public function tolak($id_lamaran)
+    {
+        $data = array(
+            'status_lamaran' => '2'
+        );
+        $this->db->where('id_lamaran', $id_lamaran);
+        $this->db->update('lamaran', $data);
+        redirect("admin/pengajuan_kerja");
+    }
+
+    public function terima($id_lamaran)
+    {
+        $data = array(
+            'status_lamaran' => '3'
+        );
+        $this->db->where('id_lamaran', $id_lamaran);
+        $this->db->update('lamaran', $data);
+        redirect("admin/pengajuan_kerja");
+    }
 }
 
 /* End of file Admin.php */

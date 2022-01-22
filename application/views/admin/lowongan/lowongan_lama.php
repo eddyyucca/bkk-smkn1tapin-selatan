@@ -23,7 +23,7 @@
                         <?php
                         $nomor = 1;
                         foreach ($data as $x) { ?>
-                            <?php if ($x->batas_tanggal < date('Y-m-d')) {
+                            <?php if ($x->batas_tanggal > date('Y-m-d')) {
                             } else { ?>
                                 <tr>
                                     <td><?= $nomor++; ?></td>
@@ -32,7 +32,7 @@
                                     <td><?= $x->batas_tanggal; ?></td>
                                     <td><?= $x->kode; ?></td>
                                     <td align="center">
-                                        <a href="<?= base_url('admin/edit_lowongan/' . $x->id_lowongan) ?>" class="btn btn-success">Ubah</a>
+
                                         <a href="<?= base_url('admin/pengajuan_ditolak/' . $x->id_lowongan) ?>" class="btn btn-primary">Lihat Pelamar</a>
                                         <a href="<?= base_url('admin/hapus_lowongan/' . $x->id_lowongan) ?>" onclick="return confirm('Yakin Hapus?')" class="btn btn-danger">Hapus Lowongan</a>
                                         <a href="<?= base_url('admin/kode_lowongan/' . $x->id_lowongan) ?>" class="btn btn-success">Kode Lowongan</a>

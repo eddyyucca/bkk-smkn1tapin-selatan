@@ -370,6 +370,15 @@ class Admin extends CI_Controller
         $this->load->view('admin/lowongan/data_lowongan', $data);
         $this->load->view('template/footer');
     }
+    public function lowongan_lama()
+    {
+        $data['judul'] = 'Data Lowongan';
+        $data['data'] = $this->lowongan_m->get_all_lowongan();
+        $data['nama'] = $this->session->userdata('nama_alumni');
+        $this->load->view('template/header', $data);
+        $this->load->view('admin/lowongan/lowongan_lama', $data);
+        $this->load->view('template/footer');
+    }
     public function pengajuan_kerja()
     {
         $data['judul'] = 'Data Lowongan';
@@ -377,6 +386,16 @@ class Admin extends CI_Controller
         $data['nama'] = $this->session->userdata('nama_alumni');
         $this->load->view('template/header', $data);
         $this->load->view('admin/lowongan/pengajuan_kerja', $data);
+        $this->load->view('template/footer');
+    }
+    public function lihat_pelamar($telpon)
+    {
+        $data['judul'] = 'Alumni';
+        $data['nama'] = $this->session->userdata('nama_alumni');
+        // $telpon =  $this->session->userdata('telpon');
+        $data['data'] = $this->alumni_m->get_row_alumni($telpon);
+        $this->load->view('template/header', $data);
+        $this->load->view('admin/lowongan/lihat_pelamar', $data);
         $this->load->view('template/footer');
     }
 

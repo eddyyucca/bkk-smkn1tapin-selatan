@@ -7,9 +7,12 @@ class Lowongan_m extends CI_Model
     public function get_all_lowongan()
     {
         $date = ('Y-m-d');
+        $date2 = '2022-02-01';
         $this->db->select('*');
         $this->db->from('lowongan');
-        $this->db->where('batas_tanggal <=', $date);
+        // $this->db->where('batas_tanggal >=', $date);
+        // $this->db->where('batas_tanggal <=', $date2);
+
 
         $this->db->order_by('id_lowongan', 'DESC');
         return  $this->db->get()->result();

@@ -22,7 +22,7 @@
                         foreach ($data as $x) { ?>
                             <tr>
                                 <td><?= $nomor++; ?></td>
-                                <td><?= $x->nama_lowongan; ?></td>
+                                <td><?= $x->id_alumni; ?></td>
                                 <td><?= $x->nama_perusahaan; ?></td>
                                 <td><?= $x->batas_tanggal; ?></td>
                                 <td align="center">

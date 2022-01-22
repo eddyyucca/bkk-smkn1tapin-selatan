@@ -74,7 +74,7 @@ class User extends CI_Controller
     }
     public function status_pengajuan()
     {
-        $data['keranjang'] = $this->cart->contents();
+
         $data['judul'] = 'Pengajuan Lamaran';
         $data['nama'] = $this->session->userdata('nama_alumni');
         $id_alumni = $this->session->userdata('id_alumni');
@@ -336,17 +336,7 @@ class User extends CI_Controller
         redirect('user');
     }
 
-    public function status()
-    {
-        $data['judul'] = 'Status Order';
-        $data['nama'] = $this->session->userdata('nama_user');
-        $bidang = $this->session->userdata('bidang');
-        $data['data'] = $this->atk_model->status($bidang);
-        $data['keranjang'] = $this->cart->contents();
-        $this->load->view('template_user/header', $data);
-        $this->load->view('user/atk/status', $data);
-        $this->load->view('template_user/footer');
-    }
+
     public function data_lowongan()
     {
         $data['judul'] = 'Data Lowongan';

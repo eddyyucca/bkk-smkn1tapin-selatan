@@ -33,8 +33,11 @@
                                     <td><?= $x->kode; ?></td>
                                     <td align="center">
                                         <a href="<?= base_url('admin/edit_lowongan/' . $x->id_lowongan) ?>" class="btn btn-success">Ubah</a>
-                                        <a href="<?= base_url('admin/pengajuan_ditolak/' . $x->id_lowongan) ?>" class="btn btn-primary">Lihat Pelamar</a>
+
+                                        <a href="<?= base_url('admin/lihat_pelamar/' . $x->id_lowongan) ?>" class="btn btn-primary">Lihat Pelamar</a>
+
                                         <a href="<?= base_url('admin/hapus_lowongan/' . $x->id_lowongan) ?>" onclick="return confirm('Yakin Hapus?')" class="btn btn-danger">Hapus Lowongan</a>
+
                                         <a href="<?= base_url('admin/kode_lowongan/' . $x->id_lowongan) ?>" class="btn btn-success">Kode Lowongan</a>
                                     </td>
                                 </tr>

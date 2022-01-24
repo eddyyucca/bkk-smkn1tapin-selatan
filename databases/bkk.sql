@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Jan 2022 pada 20.20
+-- Waktu pembuatan: 24 Jan 2022 pada 04.25
 -- Versi server: 10.4.20-MariaDB
 -- Versi PHP: 7.3.29
 
@@ -40,8 +40,9 @@ CREATE TABLE `akun` (
 --
 
 INSERT INTO `akun` (`id_akun`, `telpon`, `password`, `level`, `status`) VALUES
-(22, '081250653005', 'e10adc3949ba59abbe56e057f20f883e', 'user', 'aktif'),
-(23, '081266666666', 'e10adc3949ba59abbe56e057f20f883e', 'admin', 'aktif');
+(22, '081250653005', '4297f44b13955235245b2497399d7a93', 'user', 'aktif'),
+(23, '081266666666', 'e10adc3949ba59abbe56e057f20f883e', 'admin', 'aktif'),
+(24, '081250653001', 'e10adc3949ba59abbe56e057f20f883e', 'user', 'aktif');
 
 -- --------------------------------------------------------
 
@@ -59,16 +60,19 @@ CREATE TABLE `alumni` (
   `telpon` varchar(20) NOT NULL,
   `agama` varchar(30) NOT NULL,
   `foto_profil` text NOT NULL,
-  `email` varchar(255) NOT NULL
+  `email` varchar(255) NOT NULL,
+  `tentang_saya` varchar(255) NOT NULL,
+  `data_pdf` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `alumni`
 --
 
-INSERT INTO `alumni` (`id_alumni`, `nama_alumni`, `jurusan_smk`, `pendidikan_t`, `tgl_lahir`, `alamat`, `telpon`, `agama`, `foto_profil`, `email`) VALUES
-(5, 'eddy adha saputra', '2', 'as', '2022-01-12', 'Banjar Baru Selatan', '081250653005', 'Islam', 'aku.jpg', 'eddyyucca@gmail.com'),
-(6, 'ahmad amin badawi', '2', 'SMK', '2022-01-12', 'TAPIN', '081266666666', 'Islam', '5f4df47203808.jpg', 'aminbadawi@gmail.com');
+INSERT INTO `alumni` (`id_alumni`, `nama_alumni`, `jurusan_smk`, `pendidikan_t`, `tgl_lahir`, `alamat`, `telpon`, `agama`, `foto_profil`, `email`, `tentang_saya`, `data_pdf`) VALUES
+(5, 'eddy adha saputra', '2', 'as', '2022-01-12', 'Banjar Baru Selatan', '081250653005', 'Islam', 'aku.jpg', 'eddyyucca@gmail.com', 'tes ini aku\r\n', '2111NA77961.pdf'),
+(6, 'ahmad amin badawi', '2', 'SMK', '2022-01-12', 'TAPIN', '081266666666', 'Islam', '5f4df47203808.jpg', 'aminbadawi@gmail.com', '', ''),
+(7, 'edo', '2', 'SMK', '2022-01-23', 'Banjar Baru Selatan', '081250653001', 'Islam', 'desaintasik-kartun-anak-SD-laki-perempuan-hijab-vector.png', 'eddyyucca1@gmail.com', '', '');
 
 -- --------------------------------------------------------
 
@@ -106,7 +110,11 @@ CREATE TABLE `lamaran` (
 --
 
 INSERT INTO `lamaran` (`id_lamaran`, `id_lowongan`, `id_alumni`, `status_lamaran`) VALUES
-(1, '4', '5', '1');
+(1, '4', '5', '3'),
+(3, '7', '5', '2'),
+(4, '6', '5', '1'),
+(5, '6', '7', '1'),
+(6, '4', '7', '1');
 
 -- --------------------------------------------------------
 
@@ -119,15 +127,17 @@ CREATE TABLE `lowongan` (
   `nama_lowongan` varchar(100) NOT NULL,
   `isi_lowongan` text NOT NULL,
   `batas_tanggal` varchar(20) NOT NULL,
-  `nama_perusahaan` varchar(100) NOT NULL
+  `nama_perusahaan` varchar(100) NOT NULL,
+  `kode` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `lowongan`
 --
 
-INSERT INTO `lowongan` (`id_lowongan`, `nama_lowongan`, `isi_lowongan`, `batas_tanggal`, `nama_perusahaan`) VALUES
-(4, 'sasa', 'sa', '2022-01-18', 'a');
+INSERT INTO `lowongan` (`id_lowongan`, `nama_lowongan`, `isi_lowongan`, `batas_tanggal`, `nama_perusahaan`, `kode`) VALUES
+(4, 'sasa', 'sa', '2022-01-15', 'a', '123123'),
+(6, 'sasa', 'aaaa', '2022-01-31', 'aaaaa', '');
 
 --
 -- Indexes for dumped tables
@@ -171,13 +181,13 @@ ALTER TABLE `lowongan`
 -- AUTO_INCREMENT untuk tabel `akun`
 --
 ALTER TABLE `akun`
-  MODIFY `id_akun` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_akun` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT untuk tabel `alumni`
 --
 ALTER TABLE `alumni`
-  MODIFY `id_alumni` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_alumni` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `jurusan`
@@ -189,13 +199,13 @@ ALTER TABLE `jurusan`
 -- AUTO_INCREMENT untuk tabel `lamaran`
 --
 ALTER TABLE `lamaran`
-  MODIFY `id_lamaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_lamaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `lowongan`
 --
 ALTER TABLE `lowongan`
-  MODIFY `id_lowongan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_lowongan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 24 Jan 2022 pada 04.25
+-- Waktu pembuatan: 27 Jan 2022 pada 04.14
 -- Versi server: 10.4.20-MariaDB
 -- Versi PHP: 7.3.29
 
@@ -128,16 +128,19 @@ CREATE TABLE `lowongan` (
   `isi_lowongan` text NOT NULL,
   `batas_tanggal` varchar(20) NOT NULL,
   `nama_perusahaan` varchar(100) NOT NULL,
-  `kode` varchar(255) NOT NULL
+  `kode` varchar(255) NOT NULL,
+  `foto` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `lowongan`
 --
 
-INSERT INTO `lowongan` (`id_lowongan`, `nama_lowongan`, `isi_lowongan`, `batas_tanggal`, `nama_perusahaan`, `kode`) VALUES
-(4, 'sasa', 'sa', '2022-01-15', 'a', '123123'),
-(6, 'sasa', 'aaaa', '2022-01-31', 'aaaaa', '');
+INSERT INTO `lowongan` (`id_lowongan`, `nama_lowongan`, `isi_lowongan`, `batas_tanggal`, `nama_perusahaan`, `kode`, `foto`) VALUES
+(4, 'sasa', 'sa', '2022-01-15', 'a', '123123', ''),
+(6, 'sasa', 'aaaa', '2022-01-31', 'aaaaa', '', ''),
+(8, '123', 'sakksakslj', '2022-01-28', '123', '', ''),
+(9, 'qqqqqqqqq', 'qqqq ', '2022-01-29', 'qqqqq', '', 'bri-logo.png');
 
 --
 -- Indexes for dumped tables
@@ -205,7 +208,7 @@ ALTER TABLE `lamaran`
 -- AUTO_INCREMENT untuk tabel `lowongan`
 --
 ALTER TABLE `lowongan`
-  MODIFY `id_lowongan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_lowongan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

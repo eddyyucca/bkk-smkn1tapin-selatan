@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="container-fluid">
                     <?= validation_errors() ?>
-                    <form action="<?= base_url('admin/proses_update_lowongan/' . $data->id_lowongan)  ?>" method="POST">
+                    <form action="<?= base_url('admin/proses_update_lowongan/' . $data->id_lowongan)  ?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="inputItem">Nama Lowongan</label>
                             <input type="text" class="form-control" id="nama_lowongan" name="nama_lowongan" value="<?= $data->nama_lowongan ?>" placeholder="Nama Lowongan">
@@ -28,6 +28,21 @@
                             <label for="inputItem">Isi Lowongan</label>
                             <textarea class="form-control" name="isi_lowongan" rows="5"><?= $data->isi_lowongan ?> </textarea>
                         </div>
+                        <tr>
+                            <td>Foto</td>
+                            <td>
+                                <input type="file" name="foto" class="file" accept="image/*">
+                                <div class="input-group my-3">
+                                    <input type="text" class="form-control" disabled placeholder="Upload File" id="foto">
+                                    <div class="input-group-append">
+                                        <button type="button" class="browse btn btn-primary">Browse...</button>
+                                    </div>
+                                </div>
+                                <div class="ml-2 col-sm-6">
+                                    <img src="<?= base_url("assets/images/default.png") ?>" width="100" height="100" id="preview" class="img-thumbnail">
+                                </div>
+                            </td>
+                        </tr>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>

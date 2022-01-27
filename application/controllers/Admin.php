@@ -200,11 +200,23 @@ class Admin extends CI_Controller
             $this->load->view('admin/lowongan/input_lowongan', $data);
             $this->load->view('template/footer');
         } else {
+            $config['upload_path']   = './assets/foto/';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['remove_space'] = TRUE;
+            //$config['max_size']      = 100; 
+            //$config['max_width']     = 1024; 
+            //$config['max_height']    = 768;  
+
+            $this->load->library('upload', $config);
+            // script upload file 1
+            $this->upload->do_upload('foto');
+            $x = $this->upload->data();
             $data = array(
                 'nama_lowongan' => $this->input->post('nama_lowongan'),
                 'nama_perusahaan' => $this->input->post('nama_perusahaan'),
                 'batas_tanggal' => $this->input->post('batas_tanggal'),
                 'isi_lowongan' => $this->input->post('isi_lowongan'),
+                'foto' => $x["orig_name"],
             );
 
             $this->db->insert('lowongan', $data);
@@ -226,11 +238,23 @@ class Admin extends CI_Controller
             $this->load->view('admin/lowongan/input_lowongan', $data);
             $this->load->view('template/footer');
         } else {
+            $config['upload_path']   = './assets/foto/';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['remove_space'] = TRUE;
+            //$config['max_size']      = 100; 
+            //$config['max_width']     = 1024; 
+            //$config['max_height']    = 768;  
+
+            $this->load->library('upload', $config);
+            // script upload file 1
+            $this->upload->do_upload('foto');
+            $x = $this->upload->data();
             $data = array(
                 'nama_lowongan' => $this->input->post('nama_lowongan'),
                 'nama_perusahaan' => $this->input->post('nama_perusahaan'),
                 'batas_tanggal' => $this->input->post('batas_tanggal'),
                 'isi_lowongan' => $this->input->post('isi_lowongan'),
+                'foto' => $x["orig_name"],
             );
             $this->db->where('id_lowongan', $id_lowongan);
 
@@ -394,6 +418,16 @@ class Admin extends CI_Controller
         $data['nama'] = $this->session->userdata('nama_alumni');
         // $telpon =  $this->session->userdata('telpon');
         $data['data'] = $this->alumni_m->get_row_alumni($telpon);
+        $this->load->view('template/header', $data);
+        $this->load->view('admin/lowongan/lihat_pelamar', $data);
+        $this->load->view('template/footer');
+    }
+    public function semua_pelamar($id_pelamar)
+    {
+        $data['judul'] = 'Alumni';
+        $data['nama'] = $this->session->userdata('nama_alumni');
+        // $telpon =  $this->session->userdata('telpon');
+        $data['data'] = $this->alumni_m->semua_pelamar($id_pelamar);
         $this->load->view('template/header', $data);
         $this->load->view('admin/lowongan/lihat_pelamar', $data);
         $this->load->view('template/footer');

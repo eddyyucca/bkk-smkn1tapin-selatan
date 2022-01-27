@@ -28,6 +28,19 @@
                         <td><?= $data->isi_lowongan ?></td>
                     </tr>
                     <tr>
+
+                        <td><img class="shadow" <?php
+                                                if ($data->foto == false) { ?> src="<?= base_url('assets/images/default.png') ?>" <?php
+                                                                                                                                } else {
+                                                                                                                                    ?> src="<?= base_url('assets/foto/' . $data->foto) ?>" <?php
+                                                                                                                                                                                        } ?> "
+                              alt=" Sarana" class="card-img-top" data-holder-rendered="true" style="height: 275px; width: 225px; display: block;">
+
+
+                        </td>
+
+                    </tr>
+                    <tr>
                         <td><br></td>
                     </tr>
                     <tr>

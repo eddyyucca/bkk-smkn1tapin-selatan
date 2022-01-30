@@ -35,6 +35,11 @@
                                             <button type="submit" class="btn btn-primary btn-user btn-block">
                                                 Masuk
                                             </button>
+                                            <div class="d-flex justify-content-center mb-4 mt-3">
+                                                <small>
+                                                    <a href="<?= base_url('auth/daftar') ?>">Daftar Alumni</a>
+                                            </div>
+                                            </small>
                                         </form>
                                         <hr>
                                     </div>

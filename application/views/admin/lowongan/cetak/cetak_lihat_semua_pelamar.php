@@ -1,7 +1,7 @@
 <?php
 header("Content-type: application/vnd-ms-excel");
 $date = date('Y-m-d');
-header("Content-Disposition: attachment; filename=Data Karyawan PT HRS.xls");
+header("Content-Disposition: attachment; filename=Data Pelamar.xls");
 
 ?>
 <div class="container-fluid">
@@ -20,6 +20,13 @@ header("Content-Disposition: attachment; filename=Data Karyawan PT HRS.xls");
                             <th>Nama Lowongan</th>
                             <th>Perusahaan/Instansi</th>
                             <th>Nama Pemohon</th>
+                            <th>Jurusan SMK</th>
+                            <th>Pendidikan Terakhir</th>
+                            <th>Tanggal Lahir</th>
+                            <th>Agama</th>
+                            <th>Telpon</th>
+                            <th>Foto</th>
+                            <th>Alamat</th>
                             <th>Curriculum Vitae</th>
                         </tr>
                     </thead>

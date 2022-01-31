@@ -4,11 +4,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Kode extends CI_Controller
 {
 
-    public function index()
+    public function x($kode = null)
     {
-        $this->load->view('template/header');
-        $this->load->view('admin/index');
-        $this->load->view('template/footer');
+
+        // $kode = $this->input->post('kode');
+        if ($kode == null) {
+            echo 'Data CV Kosong';
+        } else {
+            $data['data'] = (base64_decode($kode));
+            $this->load->view('pdf/pdf', $data);
+        }
     }
 }
 

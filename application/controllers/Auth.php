@@ -9,6 +9,7 @@ class Auth extends CI_Controller
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->model('auth_m');
+        $this->load->model('jurusan_m');
     }
 
     public function index()
@@ -110,11 +111,68 @@ class Auth extends CI_Controller
         $this->session->sess_destroy();
         redirect('auth');
     }
-    public function daftar()
+    // public function daftar()
+    // {
+    //     $data['judul'] = 'Daftar';
+    //     $this->load->view('auth/template_auth/header', $data);
+    //     $this->load->view('auth/daftar', $data);
+    //     $this->load->view('auth/template_auth/footer');
+    // }
+
+    public function tambah_alumni_baru()
     {
-        $data['judul'] = 'Daftar';
-        $this->load->view('auth/template_auth/header', $data);
-        $this->load->view('auth/daftar', $data);
-        $this->load->view('auth/template_auth/footer');
+        $this->form_validation->set_rules('nama_alumni', 'Nama Lengkap', 'required|is_unique[alumni.email]');
+        $this->form_validation->set_rules('jurusan_smk', 'Jurusan', 'required');
+        $this->form_validation->set_rules('agama', 'Agama', 'required');
+        $this->form_validation->set_rules('pendidikan_t', 'Pendidikan terakhir', 'required');
+        $this->form_validation->set_rules('tgl_lahir', 'Tanggal lahir', 'required');
+        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+        $this->form_validation->set_rules('telpon', 'Telpon', 'required|is_unique[alumni.telpon]');
+        $this->form_validation->set_rules('email', 'Email', 'required|is_unique[alumni.email]');
+        if ($this->form_validation->run() == FALSE) {
+            $data['judul'] = 'Data alumni';
+            $data['nama'] = $this->session->userdata('nama_alumni');
+            $data['jurusan'] = $this->jurusan_m->get_all_jurusan();
+
+            $this->load->view('auth/template_auth/header', $data);
+            $this->load->view('auth/daftar', $data);
+            $this->load->view('auth/template_auth/footer');
+        } else {
+            $password = "123456";
+            $config['upload_path']   = './assets/foto_profil/';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['remove_space'] = TRUE;
+            //$config['max_size']      = 100; 
+            //$config['max_width']     = 1024; 
+            //$config['max_height']    = 768;  
+
+            $this->load->library('upload', $config);
+            // script upload file 1
+            $this->upload->do_upload('foto');
+            $x = $this->upload->data();
+
+            $data = array(
+                'nama_alumni' => $this->input->post('nama_alumni'),
+                'jurusan_smk' => $this->input->post('jurusan_smk'),
+                'agama' => $this->input->post('agama'),
+                'pendidikan_t' => $this->input->post('pendidikan_t'),
+                'tgl_lahir' => $this->input->post('tgl_lahir'),
+                'alamat' => $this->input->post('alamat'),
+                'telpon' => $this->input->post('telpon'),
+                'foto_profil' => $x["orig_name"],
+                'email' => $this->input->post('email'),
+                'status_akun' => "0",
+            );
+            $akun = array(
+                'telpon' => $this->input->post('telpon'),
+                'password' => md5($password),
+                'level' => "user",
+                'status' => "aktif",
+            );
+
+            $this->db->insert('alumni', $data);
+            $this->db->insert('akun', $akun);
+            return redirect('auth');
+        }
     }
 }

@@ -30,7 +30,16 @@ class User extends CI_Controller
         $this->load->view('template_user/footer');
     }
 
+    public function lihat_lowongan($id_lowongan)
+    {
+        $data['judul'] = 'Data Lowongan';
+        $data['nama'] = $this->session->userdata('nama_alumni');
+        $data['data'] = $this->lowongan_m->get_row_lowongan($id_lowongan);
 
+        $this->load->view('template/header', $data);
+        $this->load->view('user/lowongan/lihat_lowongan', $data);
+        $this->load->view('template/footer');
+    }
 
 
     // pengajuan gaji

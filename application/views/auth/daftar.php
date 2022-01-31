@@ -12,7 +12,7 @@
                         <div class="row">
                             <div class="container-fluid">
                                 <?= validation_errors() ?>
-                                <form action="<?= base_url('admin/tambah_alumni_baru')  ?>" method="POST" enctype="multipart/form-data">
+                                <form action="<?= base_url('auth/tambah_alumni_baru')  ?>" method="POST" enctype="multipart/form-data">
                                     <table class="table">
                                         <tr>
                                             <td width=20%>Alamat</td>
@@ -52,7 +52,7 @@
                                         <tr>
                                             <td>Jurusan SMK</td>
                                             <td><select name="jurusan_smk" class="form-control">
-                                                    <option value="">--PILIH BIDANG--</option>
+                                                    <option value="">--PILIH JURUSAN--</option>
                                                     <?php foreach ($jurusan as $jur) { ?>
                                                         <option value="<?= $jur->id_jurusan ?>"><?= $jur->nama_jurusan ?></option>
                                                     <?php } ?>
@@ -62,15 +62,6 @@
                                             <td>Foto</td>
                                             <td>
                                                 <input type="file" name="foto" class="file" accept="image/*">
-                                                <div class="input-group my-3">
-                                                    <input type="text" class="form-control" disabled placeholder="Upload File" id="foto">
-                                                    <div class="input-group-append">
-                                                        <button type="button" class="browse btn btn-primary">Browse...</button>
-                                                    </div>
-                                                </div>
-                                                <div class="ml-2 col-sm-6">
-                                                    <img src="<?= base_url("assets/images/default.png") ?>" width="100" height="100" id="preview" class="img-thumbnail">
-                                                </div>
                                             </td>
                                         </tr>
                                         <tr>

@@ -37,7 +37,7 @@
                                             </button>
                                             <div class="d-flex justify-content-center mb-4 mt-3">
                                                 <small>
-                                                    <a href="<?= base_url('auth/daftar') ?>">Daftar Alumni</a>
+                                                    <a href="<?= base_url('auth/tambah_alumni_baru') ?>">Daftar Alumni</a>
                                             </div>
                                             </small>
                                         </form>

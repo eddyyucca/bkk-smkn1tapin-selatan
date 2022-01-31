@@ -33,6 +33,8 @@
                                 <td><?= $x->nama_jurusan; ?></td>
                                 <td><?= $x->pendidikan_t; ?></td>
                                 <td align="center">
+                                    <?php if ($x->status_akun == 0) { ?>
+                                        <a href="<?= base_url('admin/aktifkan_akun/') . $x->telpon; ?>" class="btn btn-primary">Aktifkan</a> <?php } ?>
                                     <a href="<?= base_url('admin/delete_alumni/') . $x->telpon; ?>" onclick="return confirm('Yakin Hapus?')" class="btn btn-danger">Hapus</a>
                                     <a href="<?= base_url('admin/edit_alumni/') . $x->telpon; ?>" class="btn btn-primary">Edit</a>
                                     <a href="<?= base_url('admin/view_alumni/') . $x->telpon; ?>" class="btn btn-primary">View</a>

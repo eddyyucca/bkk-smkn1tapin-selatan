@@ -8,6 +8,7 @@ class Admin extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
+        // $this->load->library('encrypt');
         // $this->load->model('jabatan_m');
         $this->load->model('lowongan_m');
         $this->load->model('jurusan_m');
@@ -293,90 +294,15 @@ class Admin extends CI_Controller
         $this->load->view('template/footer');
     }
 
-    public function update_pegawai($id_pegawai)
+
+    public function aktifkan_akun($telpon)
     {
-        $this->form_validation->set_rules('nip', 'NIP', 'required');
-        $this->form_validation->set_rules('no_ktp', 'No KTP', 'required');
-        $this->form_validation->set_rules('nama_alumni', 'Nama Lengkap', 'required');
-        $this->form_validation->set_rules('nama_panggilan', 'Nama Panggilan', 'required');
-        $this->form_validation->set_rules('jk', 'Jenis Kelamin', 'required');
-        $this->form_validation->set_rules('tempat', 'Tempat', 'required');
-        $this->form_validation->set_rules('ttl', 'Tanggal Lahir', 'required');
-        $this->form_validation->set_rules('alamat_saat_ini', 'Alamat Saat Ini', 'required');
-        $this->form_validation->set_rules('alamat_permanen', 'Alamat Permanen', 'required');
-        $this->form_validation->set_rules('no_telp', 'No Telpon', 'required');
-        $this->form_validation->set_rules('agama', 'Agama', 'required');
-        $this->form_validation->set_rules('hobi', 'Hobi', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required');
-        $this->form_validation->set_rules('mulai_bekerja', 'Mulai Bekerja', 'required');
-        $this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
-        $this->form_validation->set_rules('jurusan', 'jurusan', 'required');
-        if ($this->form_validation->run() == FALSE) {
-            $data['judul'] = 'Data Pegawai';
-            $data['nama'] = $this->session->userdata('nama_alumni');
-            $data['jurusan'] = $this->jurusan_m->get_all_jurusan();
-            $data['jabatan'] = $this->jabatan_m->get_all_jab();
-            $data['x'] = $this->pegawai_m->get_row_pegawai($id_pegawai);
-
-            $this->load->view('template/header', $data);
-            $this->load->view('admin/pegawai/edit_pegawai', $data);
-            $this->load->view('template/footer');
-        } else {
-            $config['upload_path']   = './assets/foto_profil/';
-            $config['allowed_types'] = 'gif|jpg|png|jpeg';
-            $config['remove_space'] = TRUE;
-            //$config['max_size']      = 100; 
-            //$config['max_width']     = 1024; 
-            //$config['max_height']    = 768;  
-
-            $this->load->library('upload', $config);
-            // script upload file 1
-            $y =   $this->upload->do_upload('foto');
-            $x = $this->upload->data();
-
-            $data = array(
-                'nip' => $this->input->post('nip'),
-                'no_ktp' => $this->input->post('no_ktp'),
-                'nama_alumni' => $this->input->post('nama_alumni'),
-                'nama_panggilan' => $this->input->post('nama_panggilan'),
-                'jk' => $this->input->post('jk'),
-                'tempat' => $this->input->post('tempat'),
-                'ttl' => $this->input->post('ttl'),
-                'alamat_saat_ini' => $this->input->post('alamat_saat_ini'),
-                'alamat_permanen' => $this->input->post('alamat_permanen'),
-                'no_telp' => $this->input->post('no_telp'),
-                'agama' => $this->input->post('agama'),
-                'jabatan' => $this->input->post('jabatan'),
-                'jurusan' => $this->input->post('jurusan'),
-                'hobi' => $this->input->post('hobi'),
-                'email' => $this->input->post('email'),
-                'mulai_bekerja' => $this->input->post('mulai_bekerja'),
-                'foto' =>  $x["orig_name"],
-                'status_pegawai' => "Aktif"
-            );
-
-            $akun = array(
-                'nip' => $this->input->post('nip'),
-                'level' => "user"
-            );
-
-            $akun_model = $this->pegawai_m->get_row_pegawai2($id_pegawai);
-
-            $this->db->where('id_akun', $akun_model->nip);
-            $this->db->update('akun', $akun);
-
-            $this->db->where('id_pegawai', $id_pegawai);
-            $this->db->update('pegawai', $data);
-            return redirect('admin/pegawai');
-        }
-    }
-    public function delete_alumni($telpon)
-    {
-        $this->db->where('telpon', $telpon);
-        $this->db->delete('alumni');
+        $data = array(
+            'status_akun' => '1',
+        );
 
         $this->db->where('telpon', $telpon);
-        $this->db->delete('akun');
+        $this->db->update('alumni', $data);
         return redirect('admin/alumni');
     }
 
@@ -422,15 +348,26 @@ class Admin extends CI_Controller
         $this->load->view('admin/lowongan/lihat_pelamar', $data);
         $this->load->view('template/footer');
     }
-    public function semua_pelamar($id_pelamar)
+    public function semua_pelamar_p($id_lowongan)
     {
         $data['judul'] = 'Alumni';
         $data['nama'] = $this->session->userdata('nama_alumni');
         // $telpon =  $this->session->userdata('telpon');
-        $data['data'] = $this->alumni_m->semua_pelamar($id_pelamar);
+        $data['data'] = $this->alumni_m->get_pengajuan_p($id_lowongan);
+        $data['id_lowongan'] = $id_lowongan;
         $this->load->view('template/header', $data);
-        $this->load->view('admin/lowongan/lihat_pelamar', $data);
+        $this->load->view('admin/lowongan/lihat_semua_pelamar', $data);
         $this->load->view('template/footer');
+    }
+    public function cetak_pemohon_p($id_lowongan)
+    {
+        $data['judul'] = 'Alumni';
+        $data['nama'] = $this->session->userdata('Data Pemohon');
+        // $telpon =  $this->session->userdata('telpon');
+        $data['data'] = $this->alumni_m->get_pengajuan_p($id_lowongan);
+        // $this->load->view('template/header', $data);
+        $this->load->view('admin/lowongan/cetak/cetak_lihat_semua_pelamar', $data);
+        // $this->load->view('template/footer');
     }
 
     public function alumni()
@@ -497,6 +434,7 @@ class Admin extends CI_Controller
                 'telpon' => $this->input->post('telpon'),
                 'foto_profil' => $x["orig_name"],
                 'email' => $this->input->post('email'),
+                'status_akun' => '1',
             );
             $akun = array(
                 'telpon' => $this->input->post('telpon'),

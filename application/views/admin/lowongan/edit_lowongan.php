@@ -31,16 +31,12 @@
                         <tr>
                             <td>Foto</td>
                             <td>
-                                <input type="file" name="foto" class="file" accept="image/*">
-                                <div class="input-group my-3">
-                                    <input type="text" class="form-control" disabled placeholder="Upload File" id="foto">
-                                    <div class="input-group-append">
-                                        <button type="button" class="browse btn btn-primary">Browse...</button>
-                                    </div>
-                                </div>
-                                <div class="ml-2 col-sm-6">
-                                    <img src="<?= base_url("assets/images/default.png") ?>" width="100" height="100" id="preview" class="img-thumbnail">
-                                </div>
+                                <input type="file" name="foto" class="" accept="image/*">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <hr>
                             </td>
                         </tr>
                         <div class="form-group">

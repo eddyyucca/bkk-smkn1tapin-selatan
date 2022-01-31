@@ -1,4 +1,4 @@
-<div class="container col-6">
+<div class="container col-12">
     <!-- Page Heading -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -28,18 +28,30 @@
                         <td><?= $data->isi_lowongan ?></td>
                     </tr>
                     <tr>
+                        <td>
+                            <hr>
+                        </td>
+                        <td>
+                            <hr>
+                        </td>
+                        <td>
+                            <hr>
+                        </td>
+                    </tr>
+                    <tr>
 
                         <td><img class="shadow" <?php
                                                 if ($data->foto == false) { ?> src="<?= base_url('assets/images/default.png') ?>" <?php
                                                                                                                                 } else {
                                                                                                                                     ?> src="<?= base_url('assets/foto/' . $data->foto) ?>" <?php
                                                                                                                                                                                         } ?> "
-                              alt=" Sarana" class="card-img-top" data-holder-rendered="true" style="height: 275px; width: 225px; display: block;">
+                              alt=" Sarana" class="card-img-top" data-holder-rendered="true" style="height: 375px; width: 325px; display: block;">
 
 
                         </td>
 
                     </tr>
+
                     <tr>
                         <td><br></td>
                     </tr>
@@ -47,17 +59,15 @@
                         <td>
 
                         </td>
-                        <form action="<?= base_url('user/kirim_lamaran/' . $data->id_lowongan)  ?>" method="post">
-                            <td>
-                                <input type="hidden" name="status" value="1">
-                                <button class="btn btn-primary">Kirim Lamaran Anda</button>
-                            </td>
-                        </form>
+
                     </tr>
                 </table>
-
-
-                <form action="<?= base_url('user/proses_input_lowongan')  ?>" method="post"></form>
+                <form action="<?= base_url('user/kirim_lamaran/' . $data->id_lowongan)  ?>" method="post">
+                    <td>
+                        <input type="hidden" name="status" value="1">
+                        <button class="btn btn-primary">Kirim Lamaran Anda</button>
+                    </td>
+                </form>
             </div>
         </div>
     </div>

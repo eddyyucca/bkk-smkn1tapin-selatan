@@ -7,6 +7,7 @@
         <div class="card-body">
             <div class="table-responsive">
                 <a href="<?= base_url('admin/buat_lowongan_baru') ?>" class="btn btn-primary">Buat Lowngan Baru</a>
+                <a href="<?= base_url('admin/buat_lowongan_baru') ?>" class="btn btn-primary">Cetak Lowongan Lama</a>
                 <hr>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -15,7 +16,6 @@
                             <th>Nama Lowongan</th>
                             <th>Perusahaan/Instansi</th>
                             <th>Batas Waktu</th>
-                            <th>Kode Lowongan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -30,7 +30,6 @@
                                     <td><?= $x->nama_lowongan; ?></td>
                                     <td><?= $x->nama_perusahaan; ?></td>
                                     <td><?= $x->batas_tanggal; ?></td>
-                                    <td><?= $x->kode; ?></td>
                                     <td align="center">
 
                                         <a href="<?= base_url('admin/semua_pelamar_p/' . $x->id_lowongan) ?>" class="btn btn-primary">Lihat Pelamar</a>

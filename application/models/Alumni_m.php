@@ -90,6 +90,7 @@ class Alumni_m extends CI_Model
         $this->db->select('*');
         $this->db->from('lamaran');
         $this->db->join('alumni', 'alumni.id_alumni = lamaran.id_alumni');
+        $this->db->join('jurusan', 'jurusan.id_jurusan = alumni.jurusan_smk');
         $this->db->join('lowongan', 'lowongan.id_lowongan = lamaran.id_lowongan');
         $this->db->where('lamaran.status_lamaran', "1");
         $this->db->where('lowongan.id_lowongan', $id_lowongan);

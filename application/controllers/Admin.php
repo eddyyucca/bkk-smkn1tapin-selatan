@@ -387,7 +387,7 @@ class Admin extends CI_Controller
         $data['data'] = $this->alumni_m->get_all_alumni();
 
         // $this->load->view('template/header', $data);
-        $this->load->view('admin/alumni/cetak_data_alumni', $data);
+        $this->load->view('admin/lowongan/cetak/cetak_alumni', $data);
         // $this->load->view('template/footer');
     }
 

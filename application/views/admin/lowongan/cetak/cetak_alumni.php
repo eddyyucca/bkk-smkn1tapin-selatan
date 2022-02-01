@@ -1,14 +1,14 @@
 <?php
 header("Content-type: application/vnd-ms-excel");
 $date = date('Y-m-d');
-header("Content-Disposition: attachment; filename=Data Pelamar.xls");
+header("Content-Disposition: attachment; filename=Data Alumni.xls");
 
 ?>
 <div class="container-fluid">
     <!-- Page Heading -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h1 class="m-0 font-weight-bold ">Data Pelamar</h1>
+            <h1 class="m-0 font-weight-bold ">Data Alumni</h1>
         </div>
         <div class="card-body">
 
@@ -17,8 +17,6 @@ header("Content-Disposition: attachment; filename=Data Pelamar.xls");
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama Lowongan</th>
-                            <th>Perusahaan/Instansi</th>
                             <th>Nama Pemohon</th>
                             <th>Jurusan SMK</th>
                             <th>Pendidikan Terakhir</th>
@@ -35,8 +33,7 @@ header("Content-Disposition: attachment; filename=Data Pelamar.xls");
                         foreach ($data as $x) { ?>
                             <tr>
                                 <td><?= $nomor++; ?></td>
-                                <td><?= $x->nama_lowongan; ?></td>
-                                <td><?= $x->nama_perusahaan; ?></td>
+
                                 <td><?= $x->nama_alumni; ?></td>
                                 <td><?= $x->nama_jurusan; ?></td>
                                 <td><?= $x->pendidikan_t; ?></td>

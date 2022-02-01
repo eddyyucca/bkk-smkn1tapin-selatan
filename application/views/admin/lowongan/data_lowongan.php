@@ -15,7 +15,7 @@
                             <th>Nama Lowongan</th>
                             <th>Perusahaan/Instansi</th>
                             <th>Batas Waktu</th>
-                            <th>Kode Lowongan</th>
+                            <th>Foto Lowongan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -43,7 +43,7 @@
 
                                         <a href="<?= base_url('admin/hapus_lowongan/' . $x->id_lowongan) ?>" onclick="return confirm('Yakin Hapus?')" class="btn btn-danger">Hapus Lowongan</a>
 
-                                        <a href="<?= base_url('admin/kode_lowongan/' . $x->id_lowongan) ?>" class="btn btn-success">Kode Lowongan</a>
+
                                     </td>
                                 </tr>
                         <?php }

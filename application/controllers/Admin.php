@@ -14,10 +14,10 @@ class Admin extends CI_Controller
         $this->load->model('jurusan_m');
         $this->load->model('alumni_m');
 
-        // $level_akun = $this->session->userdata('level');
-        // if ($level_akun != "admin") {
-        //     return redirect('auth');
-        // }
+        $level_akun = $this->session->userdata('level');
+        if ($level_akun != "admin") {
+            return redirect('auth');
+        }
     }
 
     public function index()
@@ -320,6 +320,15 @@ class Admin extends CI_Controller
         $this->load->view('admin/lowongan/data_lowongan', $data);
         $this->load->view('template/footer');
     }
+    public function cetak_lowongan_aktif()
+    {
+        $data['judul'] = 'Data Lowongan';
+        $data['data'] = $this->lowongan_m->get_all_lowongan();
+        $data['nama'] = $this->session->userdata('nama_alumni');
+        // $this->load->view('template/header', $data);
+        $this->load->view('admin/lowongan/cetak/baru', $data);
+        // $this->load->view('template/footer');
+    }
     public function lowongan_lama()
     {
         $data['judul'] = 'Data Lowongan';
@@ -329,6 +338,15 @@ class Admin extends CI_Controller
         $this->load->view('admin/lowongan/lowongan_lama', $data);
         $this->load->view('template/footer');
     }
+    public function cetak_lowongan_lama()
+    {
+        $data['judul'] = 'Data Lowongan';
+        $data['data'] = $this->lowongan_m->get_all_lowongan();
+        $data['nama'] = $this->session->userdata('nama_alumni');
+        // $this->load->view('template/header', $data);
+        $this->load->view('admin/lowongan/cetak/lama', $data);
+        // $this->load->view('template/footer');
+    }
     public function pengajuan_kerja()
     {
         $data['judul'] = 'Data Lowongan';
@@ -337,6 +355,24 @@ class Admin extends CI_Controller
         $this->load->view('template/header', $data);
         $this->load->view('admin/lowongan/pengajuan_kerja', $data);
         $this->load->view('template/footer');
+    }
+    public function pelamar_ditolak()
+    {
+        $data['judul'] = 'Data Lowongan';
+        $data['data'] = $this->alumni_m->get_pengajuan_ditolak();
+        $data['nama'] = $this->session->userdata('nama_alumni');
+        // $this->load->view('template/header', $data);
+        $this->load->view('admin/lowongan/cetak/ditolak', $data);
+        // $this->load->view('template/footer');
+    }
+    public function pelamar_diterima()
+    {
+        $data['judul'] = 'Data Lowongan';
+        $data['data'] = $this->alumni_m->get_pengajuan_diterima();
+        $data['nama'] = $this->session->userdata('nama_alumni');
+        // $this->load->view('template/header', $data);
+        $this->load->view('admin/lowongan/cetak/diterima', $data);
+        // $this->load->view('template/footer');
     }
     public function lihat_pelamar($telpon)
     {

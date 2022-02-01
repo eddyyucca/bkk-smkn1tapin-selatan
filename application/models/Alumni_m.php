@@ -85,6 +85,28 @@ class Alumni_m extends CI_Model
         $this->db->order_by('lowongan.id_lowongan', 'DESC');
         return $this->db->get()->result();
     }
+    public function get_pengajuan_ditolak()
+    {
+        $this->db->select('*');
+        $this->db->from('lamaran');
+        $this->db->join('alumni', 'alumni.id_alumni = lamaran.id_alumni');
+        $this->db->join('lowongan', 'lowongan.id_lowongan = lamaran.id_lowongan');
+
+        $this->db->where('lamaran.status_lamaran', "2");
+        $this->db->order_by('lowongan.id_lowongan', 'DESC');
+        return $this->db->get()->result();
+    }
+    public function get_pengajuan_diterima()
+    {
+        $this->db->select('*');
+        $this->db->from('lamaran');
+        $this->db->join('alumni', 'alumni.id_alumni = lamaran.id_alumni');
+        $this->db->join('lowongan', 'lowongan.id_lowongan = lamaran.id_lowongan');
+
+        $this->db->where('lamaran.status_lamaran', "3");
+        $this->db->order_by('lowongan.id_lowongan', 'DESC');
+        return $this->db->get()->result();
+    }
     public function get_pengajuan_p($id_lowongan)
     {
         $this->db->select('*');

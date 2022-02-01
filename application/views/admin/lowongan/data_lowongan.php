@@ -7,6 +7,7 @@
         <div class="card-body">
             <div class="table-responsive">
                 <a href="<?= base_url('admin/buat_lowongan_baru') ?>" class="btn btn-primary">Buat Lowngan Baru</a>
+                <a href="<?= base_url('admin/cetak_lowongan_aktif') ?>" class="btn btn-primary">Cetak Lowngan Aktif</a>
                 <hr>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>

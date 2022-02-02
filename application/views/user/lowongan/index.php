@@ -26,16 +26,19 @@
                         <?php
                         $nomor = 1;
                         foreach ($data as $x) { ?>
-                            <tr>
-                                <td><?= $nomor++; ?></td>
-                                <td><?= $x->nama_lowongan; ?></td>
-                                <td><?= $x->nama_perusahaan; ?></td>
-                                <td><?= $x->batas_tanggal; ?></td>
-                                <td align="center">
-                                    <a href="<?= base_url('user/lihat_lowongan/' . $x->id_lowongan) ?>" class="btn btn-primary">Lihat Lowongan</a>
-                                </td>
-                            </tr>
-                        <?php } ?>
+                            <?php if ($x->batas_tanggal < date('Y-m-d')) {
+                            } else { ?>
+                                <tr>
+                                    <td><?= $nomor++; ?></td>
+                                    <td><?= $x->nama_lowongan; ?></td>
+                                    <td><?= $x->nama_perusahaan; ?></td>
+                                    <td><?= $x->batas_tanggal; ?></td>
+                                    <td align="center">
+                                        <a href="<?= base_url('user/lihat_lowongan/' . $x->id_lowongan) ?>" class="btn btn-primary">Lihat Lowongan</a>
+                                    </td>
+                                </tr>
+                        <?php }
+                        } ?>
                     </tbody>
                 </table>
             </div>

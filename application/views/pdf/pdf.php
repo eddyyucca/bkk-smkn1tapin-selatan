@@ -10,7 +10,7 @@
 </head>
 
 <body onload="load()">
-    <h1>Tunggu CV Aakan Di Download </h1>
+    <h1>Tunggu CV Akan Di Download </h1>
 </body>
 
 </html>

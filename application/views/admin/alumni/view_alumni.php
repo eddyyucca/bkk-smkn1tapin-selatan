@@ -72,7 +72,7 @@
 
                         <br>
 
-                        <a class="btn btn-primary mb-1" href="<?= base_url('user/data_pdf') ?>">Data PDF Lengkap</a>
+                        <a class="btn btn-primary mb-1" href="<?= base_url('./assets/file/' . $data->data_pdf) ?>">Data PDF Lengkap</a>
 
                     </div>
                 </div>

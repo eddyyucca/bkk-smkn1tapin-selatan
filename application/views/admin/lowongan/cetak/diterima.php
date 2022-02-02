@@ -2,7 +2,7 @@
     <!-- Page Heading -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h1 class="m-0 font-weight-bold ">Tabel Pelamar Di Tolak</h1>
+            <h1 class="m-0 font-weight-bold ">Tabel Pelamar Di Terima</h1>
         </div>
         <div class="card-body">
             <hr>

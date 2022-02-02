@@ -152,6 +152,14 @@ class Admin extends CI_Controller
         $this->db->delete('jurusan');
         return redirect('admin/jurusan');
     }
+    public function delete_alumni($telpon)
+    {
+        $this->db->where('telpon', $telpon);
+        $this->db->delete('akun');
+        $this->db->where('telpon', $telpon);
+        $this->db->delete('alumni');
+        return redirect('admin/jurusan');
+    }
     public function hapus_lowongan($id_lowongan)
     {
         $this->db->where('id_lowongan', $id_lowongan);

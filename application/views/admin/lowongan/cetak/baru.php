@@ -2,7 +2,7 @@
     <!-- Page Heading -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h1 class="m-0 font-weight-bold ">Lowongan Lama</h1>
+            <h1 class="m-0 font-weight-bold ">Lowongan Aktif</h1>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -22,7 +22,7 @@
                         <?php
                         $nomor = 1;
                         foreach ($data as $x) { ?>
-                            <?php if ($x->batas_tanggal > date('Y-m-d')) {
+                            <?php if ($x->batas_tanggal < date('Y-m-d')) {
                             } else { ?>
                                 <tr>
                                     <td><?= $nomor++; ?></td>

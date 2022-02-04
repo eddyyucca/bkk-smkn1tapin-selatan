@@ -13,7 +13,6 @@ class Lowongan_m extends CI_Model
         // $this->db->where('batas_tanggal >=', $date);
         // $this->db->where('batas_tanggal <=', $date2);
 
-
         $this->db->order_by('id_lowongan', 'DESC');
         return  $this->db->get()->result();
     }

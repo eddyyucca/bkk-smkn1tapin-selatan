@@ -5,8 +5,12 @@
             <h6 class="m-0 font-weight-bold ">Tabel Lowongan</h6>
         </div>
         <div class="card-body">
-            <a href="<?= base_url('admin/pelamar_ditolak') ?>" class="btn btn-primary">Pelamar Ditolak</a>
-            <a href="<?= base_url('admin/pelamar_diterima') ?>" class="btn btn-primary">Pelamar Diterima</a>
+            <a href="<?= base_url('admin/cek_ditolak') ?>" class="btn btn-success">Pelamar Ditolak</a>
+            <a href="<?= base_url('admin/cek_diterima') ?>" class="btn btn-success">Pelamar Diterima</a>
+            <a href="<?= base_url('admin/pengajuan_kerja') ?>" class="btn btn-success">Pelamar Diperiksa</a>
+            |
+            <a href="<?= base_url('admin/pelamar_ditolak') ?>" class="btn btn-primary">Cetak Pelamar Ditolak</a>
+            <a href="<?= base_url('admin/pelamar_diterima') ?>" class="btn btn-primary">Cetak Pelamar Diterima</a>
             <hr>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

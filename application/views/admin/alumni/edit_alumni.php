@@ -13,7 +13,10 @@
                         <table class="table">
                             <tr>
                                 <td width=20%>Nama Lengkap</td>
-                                <td><input type="text" name="nama_alumni" value="<?= $data->nama_alumni  ?>" class="form-control" required placeholder="Nama Lengkap"></td>
+                                <td>
+                                    <input type="text" name="nama_alumni" value="<?= $data->nama_alumni  ?>" class="form-control" required placeholder="Nama Lengkap">
+                                    <input type="hidden" name="id_alumni" value="<?= $data->id_alumni  ?>" class="form-control" required placeholder="Nama Lengkap">
+                                </td>
                             </tr>
                             <tr>
                                 <td width=20%>Tanggal Lahir</td>
@@ -43,8 +46,8 @@
                                 <td><input type="email" name="email" value="<?= $data->email  ?>" class="form-control" required placeholder="Email"></td>
                             </tr>
                             <tr>
-                                <td>Telpon</td>
-                                <td><input type="text" name="telpon" class="form-control" required placeholder="telpon"></td>
+                                <td>Tahun Lulus SMK</td>
+                                <td><input type="text" name="tahun_lulus" class="form-control" required placeholder="Tahun Lulus SMK" value="<?= $data->tahun_lulus  ?>"></td>
                             </tr>
                             <tr>
                                 <td>Jurusan SMK</td>
@@ -54,6 +57,10 @@
                                             <option value="<?= $jur->id_jurusan ?>"><?= $jur->nama_jurusan ?></option>
                                         <?php } ?>
                                     </select></td>
+                            </tr>
+                            <tr>
+                                <td>Telpon</td>
+                                <td><input type="text" name="telpon" value="<?= $data->telpon  ?>" class="form-control" required placeholder="telpon"></td>
                             </tr>
                             <tr>
                                 <td>Foto</td>

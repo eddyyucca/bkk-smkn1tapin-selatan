@@ -20,6 +20,7 @@ header("Content-Disposition: attachment; filename=Data Alumni.xls");
                             <th>Nama Pemohon</th>
                             <th>Jurusan SMK</th>
                             <th>Pendidikan Terakhir</th>
+                            <th>Tahun Lulus SMK</th>
                             <th>Tanggal Lahir</th>
                             <th>Agama</th>
                             <th>Telpon</th>
@@ -37,6 +38,7 @@ header("Content-Disposition: attachment; filename=Data Alumni.xls");
                                 <td><?= $x->nama_alumni; ?></td>
                                 <td><?= $x->nama_jurusan; ?></td>
                                 <td><?= $x->pendidikan_t; ?></td>
+                                <td><?= $x->tahun_lulus; ?></td>
                                 <td><?= $x->tgl_lahir; ?></td>
                                 <td><?= $x->agama; ?></td>
                                 <td><?= $x->telpon; ?></td>

@@ -84,7 +84,9 @@ class Admin extends CI_Controller
         $data['judul'] = 'Data jurusan';
         $data['nama'] = $this->session->userdata('nama_alumni');
         $data['data'] = $this->alumni_m->get_row_alumni($telpon);
+        $data['id_alumni'] = $this->input->post('id_alumni');
 
+        $data['jurusan'] = $this->jurusan_m->get_all_jurusan();
         $this->load->view('template/header', $data);
         $this->load->view('admin/alumni/edit_alumni', $data);
         $this->load->view('template/footer');
@@ -364,6 +366,24 @@ class Admin extends CI_Controller
         $this->load->view('admin/lowongan/pengajuan_kerja', $data);
         $this->load->view('template/footer');
     }
+    public function cek_ditolak()
+    {
+        $data['judul'] = 'Data Lowongan';
+        $data['data'] = $this->alumni_m->ditolak();
+        $data['nama'] = $this->session->userdata('nama_alumni');
+        $this->load->view('template/header', $data);
+        $this->load->view('admin/lowongan/pengajuan_kerja', $data);
+        $this->load->view('template/footer');
+    }
+    public function cek_diterima()
+    {
+        $data['judul'] = 'Data Lowongan';
+        $data['data'] = $this->alumni_m->diterima();
+        $data['nama'] = $this->session->userdata('nama_alumni');
+        $this->load->view('template/header', $data);
+        $this->load->view('admin/lowongan/pengajuan_kerja', $data);
+        $this->load->view('template/footer');
+    }
     public function pelamar_ditolak()
     {
         $data['judul'] = 'Data Lowongan';
@@ -419,6 +439,20 @@ class Admin extends CI_Controller
         $data['judul'] = 'Data alumni';
         $data['nama'] = $this->session->userdata('nama_alumni');
         $data['data'] = $this->alumni_m->get_all_alumni();
+        $data['lapor'] = false;
+
+        $this->load->view('template/header', $data);
+        $this->load->view('admin/alumni/data_alumni', $data);
+        $this->load->view('template/footer');
+    }
+    public function cari_tahun_lulus()
+    {
+        $cari_tahun_lulus =  $this->input->post('tahun_lulus');
+
+        $data['judul'] = 'Data alumni';
+        $data['nama'] = $this->session->userdata('nama_alumni');
+        $data['data'] = $this->alumni_m->get_all_alumni_tahun_lulus($cari_tahun_lulus);
+        $data['lapor'] = false;
 
         $this->load->view('template/header', $data);
         $this->load->view('admin/alumni/data_alumni', $data);
@@ -478,6 +512,7 @@ class Admin extends CI_Controller
                 'telpon' => $this->input->post('telpon'),
                 'foto_profil' => $x["orig_name"],
                 'email' => $this->input->post('email'),
+                'tahun_lulus' => $this->input->post('tahun_lulus'),
                 'status_akun' => '1',
             );
             $akun = array(
@@ -489,6 +524,58 @@ class Admin extends CI_Controller
 
             $this->db->insert('alumni', $data);
             $this->db->insert('akun', $akun);
+            return redirect('admin/alumni');
+        }
+    }
+    public function edit_alumni_baru($id_alumni)
+    {
+        $this->form_validation->set_rules('nama_alumni', 'Nama Lengkap', 'required|is_unique[alumni.email]');
+        $this->form_validation->set_rules('jurusan_smk', 'Jurusan', 'required');
+        $this->form_validation->set_rules('agama', 'Agama', 'required');
+        $this->form_validation->set_rules('pendidikan_t', 'Pendidikan terakhir', 'required');
+        $this->form_validation->set_rules('tgl_lahir', 'Tanggal lahir', 'required');
+        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+        // $this->form_validation->set_rules('telpon', 'Telpon', 'required|is_unique[alumni.telpon]');
+        // $this->form_validation->set_rules('email', 'Email', 'required|is_unique[alumni.email]');
+        if ($this->form_validation->run() == FALSE) {
+            $data['judul'] = 'Data alumni';
+            $data['nama'] = $this->session->userdata('nama_alumni');
+            $data['jurusan'] = $this->jurusan_m->get_all_jurusan();
+            $data['lapor'] = "gagal";
+            $this->load->view('template/header', $data);
+            $this->load->view('admin/alumni/data_alumni', $data);
+            $this->load->view('template/footer');
+        } else {
+            $password = "123456";
+            $config['upload_path']   = './assets/foto_profil/';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['remove_space'] = TRUE;
+            //$config['max_size']      = 100; 
+            //$config['max_width']     = 1024; 
+            //$config['max_height']    = 768;  
+
+            $this->load->library('upload', $config);
+            // script upload file 1
+            $this->upload->do_upload('foto');
+            $x = $this->upload->data();
+
+            $data = array(
+                'nama_alumni' => $this->input->post('nama_alumni'),
+                'jurusan_smk' => $this->input->post('jurusan_smk'),
+                'agama' => $this->input->post('agama'),
+                'pendidikan_t' => $this->input->post('pendidikan_t'),
+                'tgl_lahir' => $this->input->post('tgl_lahir'),
+                'alamat' => $this->input->post('alamat'),
+                'telpon' => $this->input->post('telpon'),
+                'foto_profil' => $x["orig_name"],
+                'email' => $this->input->post('email'),
+                'tahun_lulus' => $this->input->post('tahun_lulus'),
+                'status_akun' => '1',
+            );
+
+            $this->db->where('id_alumni', $id_alumni);
+            $this->db->update('alumni', $data);
+
             return redirect('admin/alumni');
         }
     }

@@ -59,6 +59,10 @@
                                 <td> Lulusan</td>
                                 <td>: <?= $data->nama_jurusan ?> </td>
                             </tr>
+                            <tr>
+                                <td> Tahun Lulus SMK</td>
+                                <td>: <?= $data->tahun_lulus ?> </td>
+                            </tr>
                         </table>
                         <hr>
                         <!-- tentang saya -->

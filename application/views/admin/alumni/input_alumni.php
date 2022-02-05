@@ -56,6 +56,10 @@
                                     </select></td>
                             </tr>
                             <tr>
+                                <td>Tahun Lulus SMK</td>
+                                <td><input type="text" name="tahun_lulus" class="form-control" required placeholder="Tahun Lulus SMK"></td>
+                            </tr>
+                            <tr>
                                 <td>Foto</td>
                                 <td>
                                     <input type="file" name="foto" class="file" accept="image/*">

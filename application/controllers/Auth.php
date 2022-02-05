@@ -162,6 +162,7 @@ class Auth extends CI_Controller
                 'foto_profil' => $x["orig_name"],
                 'email' => $this->input->post('email'),
                 'status_akun' => "0",
+                'tahun_lulus' => $this->input->post('tahun_lulus'),
             );
             $akun = array(
                 'telpon' => $this->input->post('telpon'),

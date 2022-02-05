@@ -59,6 +59,15 @@ class Alumni_m extends CI_Model
         $this->db->order_by('id_alumni', 'DESC');
         return $this->db->get('alumni')->result();
     }
+    public function get_all_alumni_tahun_lulus($cari_tahun_lulus)
+    {
+        $this->db->join('akun', 'akun.telpon = alumni.telpon');
+        $this->db->join('jurusan', 'jurusan.id_jurusan = alumni.jurusan_smk');
+        $this->db->where('tahun_lulus', $cari_tahun_lulus);
+
+        $this->db->order_by('id_alumni', 'DESC');
+        return $this->db->get('alumni')->result();
+    }
     public function get_status($id_alumni)
     {
 
@@ -82,6 +91,28 @@ class Alumni_m extends CI_Model
         $this->db->join('lowongan', 'lowongan.id_lowongan = lamaran.id_lowongan');
 
         $this->db->where('lamaran.status_lamaran', "1");
+        $this->db->order_by('lowongan.id_lowongan', 'DESC');
+        return $this->db->get()->result();
+    }
+    public function ditolak()
+    {
+        $this->db->select('*');
+        $this->db->from('lamaran');
+        $this->db->join('alumni', 'alumni.id_alumni = lamaran.id_alumni');
+        $this->db->join('lowongan', 'lowongan.id_lowongan = lamaran.id_lowongan');
+
+        $this->db->where('lamaran.status_lamaran', "2");
+        $this->db->order_by('lowongan.id_lowongan', 'DESC');
+        return $this->db->get()->result();
+    }
+    public function diterima()
+    {
+        $this->db->select('*');
+        $this->db->from('lamaran');
+        $this->db->join('alumni', 'alumni.id_alumni = lamaran.id_alumni');
+        $this->db->join('lowongan', 'lowongan.id_lowongan = lamaran.id_lowongan');
+
+        $this->db->where('lamaran.status_lamaran', "3");
         $this->db->order_by('lowongan.id_lowongan', 'DESC');
         return $this->db->get()->result();
     }

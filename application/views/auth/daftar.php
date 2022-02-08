@@ -50,6 +50,10 @@
                                             <td><input type="text" name="telpon" class="form-control" required placeholder="telpon"></td>
                                         </tr>
                                         <tr>
+                                            <td>Tahun Lulus</td>
+                                            <td><input type="text" name="tahun_lulus" class="form-control" required placeholder="Tahun Lulus"></td>
+                                        </tr>
+                                        <tr>
                                             <td>Jurusan SMK</td>
                                             <td><select name="jurusan_smk" class="form-control">
                                                     <option value="">--PILIH JURUSAN--</option>

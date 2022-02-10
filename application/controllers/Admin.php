@@ -339,6 +339,18 @@ class Admin extends CI_Controller
         $this->load->view('admin/lowongan/cetak/baru', $data);
         // $this->load->view('template/footer');
     }
+    public function cetak_lowongan_aktif_bulan()
+    {
+        $tgl1 = $this->input->post('tgl1');
+        $tgl2 = $this->input->post('tgl2');
+
+        $data['judul'] = 'Data Lowongan';
+        $data['data'] = $this->lowongan_m->cari_tanggal($tgl1, $tgl2);
+        $data['nama'] = $this->session->userdata('nama_alumni');
+        // $this->load->view('template/header', $data);
+        $this->load->view('admin/lowongan/cetak/baru', $data);
+        // $this->load->view('template/footer');
+    }
     public function lowongan_lama()
     {
         $data['judul'] = 'Data Lowongan';
@@ -350,8 +362,25 @@ class Admin extends CI_Controller
     }
     public function cetak_lowongan_lama()
     {
+
+        $tgl1 = $this->input->post('tgl1');
+        $tgl2 = $this->input->post('tgl2');
+
         $data['judul'] = 'Data Lowongan';
         $data['data'] = $this->lowongan_m->get_all_lowongan();
+        $data['nama'] = $this->session->userdata('nama_alumni');
+        // $this->load->view('template/header', $data);
+        $this->load->view('admin/lowongan/cetak/lama', $data);
+        // $this->load->view('template/footer');
+    }
+    public function cetak_lowongan_lama_bulan()
+    {
+
+        $tgl1 = $this->input->post('tgl1');
+        $tgl2 = $this->input->post('tgl2');
+
+        $data['judul'] = 'Data Lowongan';
+        $data['data'] = $this->lowongan_m->cari_tanggal($tgl1, $tgl2);
         $data['nama'] = $this->session->userdata('nama_alumni');
         // $this->load->view('template/header', $data);
         $this->load->view('admin/lowongan/cetak/lama', $data);

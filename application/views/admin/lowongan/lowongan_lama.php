@@ -9,6 +9,16 @@
                 <a href="<?= base_url('admin/buat_lowongan_baru') ?>" class="btn btn-primary">Buat Lowngan Baru</a>
                 <a href="<?= base_url('admin/cetak_lowongan_lama') ?>" class="btn btn-primary">Cetak Lowongan Lama</a>
                 <hr>
+                <form action="<?= base_url('admin/cetak_lowongan_lama_bulan') ?>" method="post">
+                    <div class="input-group mb-3 col-6">
+                        <input type="date" class="form-control" id="tgl1" name="tgl1" placeholder="Batas Tanggal">
+
+                        <input type="date" class="form-control" id="tgl2" name="tgl2" placeholder="Batas Tanggal">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit" id="button-addon2">Cetak</button>
+                        </div>
+                    </div>
+                </form>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
